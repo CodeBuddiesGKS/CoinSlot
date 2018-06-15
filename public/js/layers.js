@@ -16,14 +16,12 @@ export function createBackgroundLayer(backgrounds, sprites) {
         drawBackground(background, buffer.getContext('2d'), sprites);
     });
 
-    return function drawBackgroundLayer(context) {
+    return (context) => {
         context.drawImage(buffer, 0, 0);
     };
 }
-export function createSpriteLayer(sprite, pos) {
+export function createSpriteLayer(mario) {
     return (context) => {
-        for (let i=0; i<20; ++i) {
-            sprite.draw('idle', context, pos.x - i*4, pos.y - i*4);
-        }
+        mario.draw(context);
     }
 }
