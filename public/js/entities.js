@@ -14,7 +14,14 @@ export function createMario() {
             // gravity = -9.8 m/s^2
             mario.position.x += mario.velocity.x * deltaTime;
             mario.position.y += mario.velocity.y * deltaTime;
-            mario.velocity.y += gravity * deltaTime;
+            if (mario.position.y < 192) {
+                // Turn on gravity
+                mario.velocity.y += gravity * deltaTime;
+            } else {
+                // Turn off gravity
+                mario.position.y = 192;
+                mario.velocity.y = 0;
+            }
         };
         return mario;
     });
