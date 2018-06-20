@@ -3,29 +3,42 @@ import Entity from './Entity.js';
 import KeyboardState from './KeyboardState.js';
 import Timer from './Timer.js';
 import {createMario} from './entities.js';
-import {createBackgroundLayer, createSpriteLayer} from './layers.js';
+import {createCollisionLayer} from './layers.js';
 import {loadLevel} from './loaders.js';
-import {loadBackgroundSprites} from './sprites.js';
+
+function accelerate(mario, deltaX) {
+    let quarter = deltaX/4;
+    let intervalCount = 0;
+    mario.velocity.x += quarter;
+    let intervalRef = setInterval(() => {
+        ++intervalCount;
+        mario.velocity.x += quarter;
+        if (intervalCount > 2) {
+            clearInterval(intervalRef);
+        }
+    }, 50);
+}
 
 function bindControls(mario) {
     const input = new KeyboardState();
     function leftEvent(keyState) {
-        if (keyState === 1) {
-            mario.velocity.x = -100;
+        if (keyState) {
+            mario.velocity.x -= 100;
+            //accelerate(mario, -100);
         } else {
-            mario.velocity.x = 0;
+            mario.velocity.x += 100;
         }
     }
     function rightEvent(keyState) {
-        if (keyState === 1) {
-            mario.velocity.x = 100;
+        if (keyState) {
+            mario.velocity.x += 100;
         } else {
-            mario.velocity.x = 0;
+            mario.velocity.x -= 100;
         }
     }
     function upEvent(keyState) {
-        if (keyState === 1) {
-            mario.velocity.y = -500;
+        if (keyState) {
+            mario.velocity.y -= 500;
         }
     }
     function downEvent(keyState) {}
@@ -37,6 +50,14 @@ function bindControls(mario) {
     input.addCode(38, upEvent); //up arrow
     input.addCode(83, downEvent); //s
     input.addCode(40, downEvent); //down arrow
+
+    input.addCode(32, keyState => { //space
+        if (keyState) {
+            mario.Jump.start();
+        } else {
+            mario.Jump.cancel();
+        }
+    });
     input.listenTo();
 }
 
@@ -45,23 +66,28 @@ const context = canvas.getContext("2d");
 
 Promise.all([
     createMario(),
-    loadBackgroundSprites(),
     loadLevel('1-1')
-]).then(([mario, backgroundSprites, level]) => {
-    const comp = new Compositor();
-    const backgroundLayer = createBackgroundLayer(level.backgrounds, backgroundSprites);
-    const spriteLayer = createSpriteLayer(mario);
-    comp.layers.push(backgroundLayer);
-    comp.layers.push(spriteLayer);
-
+]).then(([mario, level]) => {
     mario.position.set(16, 192);
-    //mario.velocity.set(200, -600);
     bindControls(mario);
+    
+    level.comp.layers.push(createCollisionLayer(level));
+
+    level.entities.add(mario);
+
+    ['mousedown', 'mousemove'].forEach(eventName => {
+        canvas.addEventListener(eventName, event => {
+            if (event.buttons === 1) {
+                mario.velocity.set(0, 0);
+                mario.position.set(event.offsetX, event.offsetY);
+            }
+        });
+    });
 
     const animationTimer = new Timer(1/60);
     animationTimer.update = (deltaTime) => {
-        mario.update(deltaTime);
-        comp.draw(context);
+        level.update(deltaTime);
+        level.comp.draw(context);
     }
     animationTimer.start();
 });
