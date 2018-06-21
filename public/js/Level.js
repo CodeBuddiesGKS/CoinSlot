@@ -6,6 +6,7 @@ export default class Level {
     constructor() {
         this.comp = new Compositor();
         this.entities = new Set();
+        this.gravity = 2000;
         this.tiles = new Matrix();
         this.tileCollider = new TileCollider(this.tiles);
     }
@@ -13,7 +14,12 @@ export default class Level {
         this.entities.forEach(entity => {
             entity.update(deltaTime);
 
-            this.tileCollider.test(entity);
+            entity.position.x += entity.velocity.x * deltaTime;
+            this.tileCollider.checkX(entity);
+            entity.position.y += entity.velocity.y * deltaTime;
+            this.tileCollider.checkY(entity);
+
+            entity.velocity.y += this.gravity * deltaTime;
         });
     }
 }

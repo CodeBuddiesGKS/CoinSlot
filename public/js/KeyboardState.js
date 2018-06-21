@@ -3,26 +3,26 @@ const RELEASED = 0;
 
 export default class KeyboardState {
     constructor() {
-        this.keyCodes = new Map();
+        this.codes = new Map();
         this.keyStates = new Map();
     }
-    addCode(keyCode, callback) {
-        this.keyCodes.set(keyCode, callback);
+    addCode(code, callback) {
+        this.codes.set(code, callback);
     }
     listenTo() {
         ['keydown', 'keyup'].forEach(eventName => {
             window.addEventListener(eventName, event => {
-                const keyCode = event.keyCode;
+                const code = event.code;
                 const keyState = (event.type === 'keydown') ? PRESSED : RELEASED;
-                if (!this.keyCodes.has(keyCode)) {
+                if (!this.codes.has(code)) {
                     return;
                 }
                 event.preventDefault();
-                if (this.keyStates.get(keyCode) === keyState) {
+                if (this.keyStates.get(code) === keyState) {
                     return;
                 }
-                this.keyStates.set(keyCode, keyState);
-                this.keyCodes.get(keyCode)(keyState);
+                this.keyStates.set(code, keyState);
+                this.codes.get(code)(keyState);
             });
         });
     }

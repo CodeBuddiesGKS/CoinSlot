@@ -12,14 +12,6 @@ export function createBackgroundLayer(level, sprites) {
     };
 }
 
-export function createSpriteLayer(entities) {
-    return (context) => {
-        entities.forEach(entity => {
-            entity.draw(context);
-        });
-    }
-}
-
 export function createCollisionLayer(level) {
     const resolvedTiles = [];
 
@@ -36,27 +28,48 @@ export function createCollisionLayer(level) {
         context.strokeStyle = 'green';
         resolvedTiles.forEach(({x, y}) => {
             context.beginPath();
-            context.rect(
+            context.strokeRect(
                 x*tileSize,
                 y*tileSize,
                 tileSize,
                 tileSize
             );
-            context.stroke();
         });
 
+        resolvedTiles.length = 0;
+    };
+}
+
+export function createEntityHitboxLayer(level) {
+    return (context) => {
         context.strokeStyle = 'red';
         level.entities.forEach(entity => {
             context.beginPath();
-            context.rect(
+            context.strokeRect(
                 entity.position.x,
                 entity.position.y,
                 entity.size.x,
                 entity.size.y
             );
-            context.stroke();
         });
-
-        resolvedTiles.length = 0;
     };
+}
+
+export function createGridLayer(level) {
+    return (context) => {
+        context.strokeStyle = 'rgba(0,0,0,0.1)';
+        context.lineWidth = 1;
+        level.tiles.forEach((value, x, y) => {
+            context.beginPath();
+            context.strokeRect(x*16, y*16, 16, 16);
+        });
+    };
+}
+
+export function createSpriteLayer(entities) {
+    return (context) => {
+        entities.forEach(entity => {
+            entity.draw(context);
+        });
+    }
 }
