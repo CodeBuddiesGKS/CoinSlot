@@ -1,6 +1,6 @@
 import KeyboardState from './KeyboardState.js';
 
-export function bindControls(entity) {
+export function bindKeyboardControls(entity) {
     const input = new KeyboardState();
 
     function leftEvent(pressed) {

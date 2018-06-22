@@ -7,7 +7,7 @@ import Velocity from './traits/Velocity.js';
 export function createMario() {
     return loadMarioSprite().then(marioSprite => {
         const mario = new Entity();
-        mario.size.set(14, 16);
+        mario.size.set(12, 16);
         mario.addTrait(new Go());
         mario.addTrait(new Jump());
         mario.addTrait(new Velocity());
