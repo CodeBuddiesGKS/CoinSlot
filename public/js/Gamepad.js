@@ -17,7 +17,11 @@ export default class Gamepad {
                     switch(bIndex) {
                         case 1:
                             //console.log('UpPress', currState);
-                            if (currState) entity.velocity.y -= 500;
+                            if (currState) {
+                                entity.Jump.start();
+                            } else {
+                                entity.Jump.cancel();
+                            }
                             break;
                         case 13:
                             //console.log('DownPress', currState);

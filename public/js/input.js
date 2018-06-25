@@ -11,7 +11,9 @@ export function bindKeyboardControls(entity) {
     }
     function upEvent(pressed) {
         if (pressed) {
-            entity.velocity.y -= 500;
+            entity.Jump.start();
+        } else {
+            entity.Jump.cancel();
         }
     }
     function downEvent(pressed) {}

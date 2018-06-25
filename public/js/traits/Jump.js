@@ -4,7 +4,7 @@ export default class Jump extends Trait {
     constructor() {
         super('Jump');
         this.duration = 1/60;
-        this.velocity = 500;
+        this.velocity = 470;
         this.engageTime = 0;
     }
     start() {
