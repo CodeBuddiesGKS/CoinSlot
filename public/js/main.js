@@ -1,6 +1,6 @@
 import Compositor from './Compositor.js';
 import Entity from './Entity.js';
-import GamepadState from './GamepadState.js';
+import Gamepad from './Gamepad.js';
 import Timer from './Timer.js';
 import {createMario} from './entities.js';
 import {bindKeyboardControls} from './input.js';
@@ -23,7 +23,7 @@ Promise.all([
     //tools.showEntityHitbox(level);
     //tools.showGrid(level);
 
-    const controller1 = new GamepadState(1);
+    const controller1 = new Gamepad(1);
     const timer = new Timer(1/60);
     timer.update = (deltaTime) => {
         controller1.checkGamepadForUpdates(mario);
