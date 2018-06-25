@@ -12,7 +12,7 @@ export function createMario() {
         mario.addTrait(new Jump());
         mario.addTrait(new Velocity());
         mario.draw = (context) => {
-            marioSprite.draw('idle', context, mario.position.x, mario.position.y);
+            marioSprite.draw('idle', context, 0, 0);
         };
         return mario;
     });

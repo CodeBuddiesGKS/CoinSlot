@@ -1,33 +1,66 @@
 {
+    "spriteSheet": "overworld",
     "backgrounds": [
+        {
+            "tile": "ground",
+            "type": "impassable",
+            "ranges": [
+                [-1, 1, 0, 15]
+            ]
+        },
         {
             "tile": "sky",
             "ranges": [
-                [
-                    0, 16,
-                    0, 13
-                ]
+                [0, 160, 0, 13]
+            ]
+        },
+        {
+            "tile": "chocolate",
+            "type": "impassable",
+            "ranges": [
+                [0, 10]
+            ]
+        },
+        {
+            "tile": "brick",
+            "type": "impassable",
+            "ranges": [
+                [0, 11]
+            ]
+        },
+        {
+            "tile": "powerup",
+            "type": "impassable",
+            "ranges": [
+                [0, 12]
             ]
         },
         {
             "tile": "ground",
+            "type": "impassable",
             "ranges": [
-                [
-                    0, 16,
-                    13, 15
-                ],
-                [
-                    9, 10,
-                    8, 9
-                ],
-                [
-                    12, 13,
-                    11, 12
-                ],
-                [
-                    13, 14,
-                    6, 12
-                ]
+                [0, 160, 13, 2]
+            ]
+        },
+        {
+            "tile": "brick",
+            "type": "impassable",
+            "ranges": [
+                [8, 10],
+                [9, 5, 9, 1]
+            ]
+        },
+        {
+            "tile": "powerup",
+            "type": "impassable",
+            "ranges": [
+                [14, 9]
+            ]
+        },
+        {
+            "tile": "sky",
+            "ranges": [
+                [20, 3, 13, 2]
             ]
         }
     ]

@@ -1,14 +1,14 @@
 export function createBackgroundLayer(level, sprites) {
     const buffer = document.createElement('canvas');
-    buffer.width = 256;
+    buffer.width = 2560;
     buffer.height = 240;
 
     level.tiles.forEach((tile, x, y) => {
         sprites.drawTile(tile.name, buffer.getContext('2d'), x, y);
     });
 
-    return (context) => {
-        context.drawImage(buffer, 0, 0);
+    return (context, camera) => {
+        context.drawImage(buffer, -camera.position.x, -camera.position.y);
     };
 }
 
@@ -24,13 +24,13 @@ export function createCollisionLayer(level) {
         return getByIndexOriginal.call(tileResolver, x, y);
     }
 
-    return (context) => {
+    return (context, camera) => {
         context.strokeStyle = 'green';
         resolvedTiles.forEach(({x, y}) => {
             context.beginPath();
             context.strokeRect(
-                x*tileSize,
-                y*tileSize,
+                x*tileSize - camera.position.x,
+                y*tileSize - camera.position.y,
                 tileSize,
                 tileSize
             );
@@ -41,13 +41,13 @@ export function createCollisionLayer(level) {
 }
 
 export function createEntityHitboxLayer(level) {
-    return (context) => {
+    return (context, camera) => {
         context.strokeStyle = 'red';
         level.entities.forEach(entity => {
             context.beginPath();
             context.strokeRect(
-                entity.position.x,
-                entity.position.y,
+                entity.position.x - camera.position.x,
+                entity.position.y - camera.position.y,
                 entity.size.x,
                 entity.size.y
             );
@@ -56,7 +56,7 @@ export function createEntityHitboxLayer(level) {
 }
 
 export function createGridLayer(level) {
-    return (context) => {
+    return (context, camera) => {
         context.strokeStyle = 'rgba(0,0,0,0.1)';
         context.lineWidth = 1;
         level.tiles.forEach((value, x, y) => {
@@ -66,10 +66,22 @@ export function createGridLayer(level) {
     };
 }
 
-export function createSpriteLayer(entities) {
-    return (context) => {
+export function createSpriteLayer(entities, width=64, height=64) {
+    const spriteBuffer = document.createElement('canvas');
+    spriteBuffer.width = width;
+    spriteBuffer.height = width;
+    const spriteBufferContext = spriteBuffer.getContext('2d');
+
+    return (context, camera) => {
         entities.forEach(entity => {
-            entity.draw(context);
+            spriteBufferContext.clearRect(0, 0, width, height);
+            entity.draw(spriteBufferContext);
+
+            context.drawImage(
+                spriteBuffer, 
+                entity.position.x - camera.position.x, 
+                entity.position.y - camera.position.y
+            );
         });
     }
 }

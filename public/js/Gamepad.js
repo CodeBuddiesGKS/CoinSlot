@@ -38,7 +38,7 @@ export default class Gamepad {
                 }
             });
         } else {
-            console.log('Pad update skipped');
+            console.log('Press any button to connect...');
         }
     }
     findGamepads() {

@@ -1,3 +1,4 @@
+import Camera from './Camera.js';
 import Compositor from './Compositor.js';
 import Entity from './Entity.js';
 import Gamepad from './Gamepad.js';
@@ -14,13 +15,16 @@ Promise.all([
     createMario(),
     loadLevel('1-1')
 ]).then(([mario, level]) => {
+    const camera = new Camera();
+    window.camera = camera;
+
     mario.position.set(16, 144);
     level.entities.add(mario);
     bindKeyboardControls(mario);
     
-    //tools.enableEntityDrag(canvas, level, mario);
-    //tools.showCollision(level);
-    //tools.showEntityHitbox(level);
+    tools.enableMouseControl(canvas, camera, level, mario);
+    tools.showCollision(level);
+    tools.showEntityHitbox(level);
     //tools.showGrid(level);
 
     const controller1 = new Gamepad(1);
@@ -28,7 +32,7 @@ Promise.all([
     timer.update = (deltaTime) => {
         controller1.checkGamepadForUpdates(mario);
         level.update(deltaTime);
-        level.comp.draw(context);
+        level.comp.draw(context, camera);
     };
     timer.start();
 });
