@@ -17,14 +17,13 @@ Promise.all([
     loadLevel('1-1')
 ]).then(([mario, level]) => {
     const camera = new Camera();
-    window.camera = camera;
 
     mario.position.set(16, 144);
     level.entities.add(mario);
     bindKeyboardControls(mario);
     
     tools.enableMouseControl(canvas, camera, level, mario);
-    tools.showCamera(level, camera);
+    //tools.showCamera(level, camera);
     //tools.showCollision(level);
     //tools.showEntityHitbox(level);
     //tools.showGrid(level);

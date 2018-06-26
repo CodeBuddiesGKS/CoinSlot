@@ -4,8 +4,20 @@
     "tileH": 16,
     "tiles": [
         {
+            "name": "chocolate",
+            "index": [0, 3]
+        },
+        {
+            "name": "brick",
+            "index": [1, 2]
+        },
+        {
             "name": "ground",
             "index": [0, 2]
+        },
+        {
+            "name": "powerup",
+            "index": [24, 2]
         },
         {
             "name": "sky",

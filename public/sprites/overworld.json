@@ -20,8 +20,34 @@
             "index": [24, 0]
         },
         {
+            "name": "powerup-1",
+            "index": [24, 0]
+        },
+        {
+            "name": "powerup-2",
+            "index": [25, 0]
+        },
+        {
+            "name": "powerup-3",
+            "index": [26, 0]
+        },
+        {
             "name": "sky",
             "index": [3, 23]
+        }
+    ],
+    "animations": [
+        {
+            "name": "powerup",
+            "frameLength": 0.1,
+            "frames": [
+                "powerup-1",
+                "powerup-1",
+                "powerup-1",
+                "powerup-2",
+                "powerup-3",
+                "powerup-2"
+            ]
         }
     ]
 }
