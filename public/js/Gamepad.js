@@ -28,11 +28,11 @@ export default class Gamepad {
                             break;
                         case 14:
                             //console.log('LeftPress', currState);
-                            entity.Go.dir = -pressed;
+                            entity.Go.dir += pressed ? -1:1;
                             break;
                         case 15:
                             //console.log('RightPress', currState);
-                            entity.Go.dir = pressed;
+                            entity.Go.dir += pressed ? 1:-1;
                             break;
                     }
                 }

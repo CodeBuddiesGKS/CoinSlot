@@ -3,12 +3,6 @@ import KeyboardState from './KeyboardState.js';
 export function bindKeyboardControls(entity) {
     const input = new KeyboardState();
 
-    function leftEvent(pressed) {
-        entity.Go.dir = -pressed;
-    }
-    function rightEvent(pressed) {
-        entity.Go.dir = pressed;
-    }
     function upEvent(pressed) {
         if (pressed) {
             entity.Jump.start();
@@ -17,22 +11,22 @@ export function bindKeyboardControls(entity) {
         }
     }
     function downEvent(pressed) {}
+    function leftEvent(pressed) {
+        entity.Go.dir += pressed ? -1:1;
+    }
+    function rightEvent(pressed) {
+        entity.Go.dir += pressed ? 1:-1;
+    }
 
-    input.addCode('KeyA', leftEvent);
-    input.addCode('ArrowLeft', leftEvent);
-    input.addCode('KeyD', rightEvent);
-    input.addCode('ArrowRight', rightEvent);
+    input.addCode('Space', upEvent);
     input.addCode('KeyW', upEvent);
     input.addCode('ArrowUp', upEvent);
     input.addCode('KeyS', downEvent);
     input.addCode('ArrowDown', downEvent);
-    input.addCode('Space', pressed => {
-        if (pressed) {
-            entity.Jump.start();
-        } else {
-            entity.Jump.cancel();
-        }
-    });
+    input.addCode('KeyA', leftEvent);
+    input.addCode('ArrowLeft', leftEvent);
+    input.addCode('KeyD', rightEvent);
+    input.addCode('ArrowRight', rightEvent);
     
     input.listenTo();
 }
