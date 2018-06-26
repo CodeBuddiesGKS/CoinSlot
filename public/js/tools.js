@@ -1,4 +1,9 @@
-import {createCollisionLayer, createEntityHitboxLayer, createGridLayer} from './layers.js';
+import {
+    createCameraLayer,
+    createCollisionLayer,
+    createEntityHitboxLayer,
+    createGridLayer
+} from './layers.js';
 
 export function enableMouseControl(canvas, camera, level, entity) {
     let lastEvent;
@@ -32,6 +37,10 @@ export function enableMouseControl(canvas, camera, level, entity) {
     canvas.addEventListener('contextmenu', event => {
         event.preventDefault();
     });
+}
+
+export function showCamera(level, camera) {
+    level.comp.layers.push(createCameraLayer(camera));
 }
 
 export function showCollision(level) {

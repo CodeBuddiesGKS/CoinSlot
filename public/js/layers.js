@@ -1,14 +1,53 @@
-export function createBackgroundLayer(level, sprites) {
-    const buffer = document.createElement('canvas');
-    buffer.width = 2560;
-    buffer.height = 240;
+export function createCameraLayer(cameraToDraw) {
+    return (context, fromCamera) => {
+        context.strokeStyle = 'purple';
+        context.beginPath();
+        context.strokeRect(
+            cameraToDraw.position.x - fromCamera.position.x,
+            cameraToDraw.position.y - fromCamera.position.y,
+            cameraToDraw.size.x,
+            cameraToDraw.size.y
+        );
+    }
+}
 
-    level.tiles.forEach((tile, x, y) => {
-        sprites.drawTile(tile.name, buffer.getContext('2d'), x, y);
-    });
+export function createBackgroundLayer(level, sprites) {
+    const tiles = level.tiles;
+    const resolver = level.tileCollider.tiles;
+
+    const buffer = document.createElement('canvas');
+    buffer.width = 256 + 16;
+    buffer.height = 240;
+    const context = buffer.getContext('2d');
+
+    let startIndex, endIndex;
+    function redraw(drawFrom, drawTo) {
+        if (drawFrom === startIndex && drawTo === endIndex) {
+            return;
+        }
+        startIndex = drawFrom;
+        endIndex = drawTo;
+        for (let x=startIndex; x<=endIndex; ++x) {
+            const col = tiles.grid[x];
+            if (col) {
+                col.forEach((tile, y) => {
+                    sprites.drawTile(tile.name, context, x - startIndex, y);
+                });
+            }
+        }
+    }
 
     return (context, camera) => {
-        context.drawImage(buffer, -camera.position.x, -camera.position.y);
+        const drawWidth = resolver.toIndex(camera.size.x);
+        const drawFrom = resolver.toIndex(camera.position.x);
+        const drawTo = drawFrom + drawWidth;
+        redraw(drawFrom, drawTo);
+
+        context.drawImage(
+            buffer,
+            -camera.position.x % 16,
+            -camera.position.y
+        );
     };
 }
 
