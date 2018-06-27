@@ -15,6 +15,10 @@ export default class Gamepad {
                 if (prevState !== currState) {
                     let pressed = currState ? 1 : 0;
                     switch(bIndex) {
+                        case 0:
+                            //console.log('sprintPress', currState);
+                            entity.Go.windResistance = currState ? (1/5000) : (1/1500);
+                            break;
                         case 1:
                             //console.log('UpPress', currState);
                             if (currState) {

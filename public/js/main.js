@@ -32,13 +32,22 @@ Promise.all([
     const timer = new Timer(1/60);
     timer.update = (deltaTime) => {
         controller1.checkGamepadForUpdates(mario);
-        let rightOffset = mario.position.x - (camera.position.x + 160);
-        if (rightOffset > 0) {
-            camera.position.x += rightOffset;
+        // Different implementation for camera chase
+        // let rightOffset = mario.position.x - (camera.position.x + 160);
+        // if (rightOffset > 0) {
+        //     camera.position.x += rightOffset;
+        // }
+        // let leftOffset = mario.position.x - (camera.position.x);
+        // if (leftOffset < 0) {
+        //     camera.position.x += leftOffset;
+        // }
+        if (mario.position.x > 100) {
+            camera.position.x = mario.position.x - 100;
         }
-        let leftOffset = mario.position.x - (camera.position.x);
-        if (leftOffset < 0) {
-            camera.position.x += leftOffset;
+        // resets mario to the beginning if he falls off the map
+        if (mario.position.y > 240) {
+            mario.position.set(16, 144);
+            camera.position.x = mario.position.x - 16;
         }
         level.update(deltaTime);
         level.comp.draw(context, camera);

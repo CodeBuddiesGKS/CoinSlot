@@ -6,7 +6,7 @@ export default class Level {
     constructor() {
         this.comp = new Compositor();
         this.entities = new Set();
-        this.gravity = 2000;
+        this.gravity = 1500;
         this.tiles = new Matrix();
         this.totalTime = 0;
         this.tileCollider = new TileCollider(this.tiles);

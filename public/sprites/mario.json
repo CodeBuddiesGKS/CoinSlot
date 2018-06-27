@@ -2,8 +2,16 @@
     "imageURL": "img/characters.gif",
     "frames": [
         {
+            "name": "break",
+            "rect": [337, 44, 16, 16]
+        },
+        {
             "name": "idle",
             "rect": [277, 44, 12, 16]
+        },
+        {
+            "name": "jump",
+            "rect": [355, 44, 16, 16]
         },
         {
             "name": "run-1",

@@ -1,4 +1,5 @@
 import TileResolver from './TileResolver.js';
+import {Sides} from './Entity.js';
 
 export default class TileCollider {
     constructor(tileMatrix) {
@@ -50,9 +51,11 @@ export default class TileCollider {
                 return;
             }
             if (entity.velocity.y > 0 && y > match.t) {
+                entity.obstruct(Sides.BOTTOM);
                 entity.position.y = match.t - entity.size.y;
                 entity.velocity.y = 0;
             } else if (entity.velocity.y < 0 && y < match.b) {
+                entity.obstruct(Sides.TOP);
                 entity.position.y = match.b;
                 entity.velocity.y = 0;
             }
