@@ -1,24 +1,24 @@
 import KeyboardState from './KeyboardState.js';
 
-export function bindKeyboardControls(entity) {
+export function bindKeyboardControls(mario) {
     const input = new KeyboardState();
 
     function upEvent(pressed) {
         if (pressed) {
-            entity.Jump.start();
+            mario.Jump.start();
         } else {
-            entity.Jump.cancel();
+            mario.Jump.cancel();
         }
     }
     function downEvent(pressed) {}
     function leftEvent(pressed) {
-        entity.Go.dir += pressed ? -1:1;
+        mario.Go.dir += pressed ? -1:1;
     }
     function rightEvent(pressed) {
-        entity.Go.dir += pressed ? 1:-1;
+        mario.Go.dir += pressed ? 1:-1;
     }
     function sprintEvent(pressed) {
-        entity.Go.windResistance = pressed ? (1/5000) : (1/1500);
+        mario.turbo(pressed);
     }
 
     input.addCode('Space', upEvent);

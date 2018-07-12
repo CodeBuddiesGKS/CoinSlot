@@ -17,7 +17,7 @@ export default class Gamepad {
                     switch(bIndex) {
                         case 0:
                             //console.log('sprintPress', currState);
-                            entity.Go.windResistance = currState ? (1/5000) : (1/1500);
+                            entity.turbo(pressed);
                             break;
                         case 1:
                             //console.log('UpPress', currState);
