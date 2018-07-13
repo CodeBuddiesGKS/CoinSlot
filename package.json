@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GavinSnigums/CoinSlot.git"
+    "url": "git+https://github.com/CodeBuddiesGKS/CoinSlot.git"
   },
   "author": "Gavin Bonneville",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GavinSnigums/CoinSlot/issues"
+    "url": "https://github.com/CodeBuddiesGKS/CoinSlot.git"
   },
-  "homepage": "https://github.com/GavinSnigums/CoinSlot#readme",
+  "homepage": "https://github.com/CodeBuddiesGKS/CoinSlot.git#readme",
   "dependencies": {
     "serve": "^8.2.0"
   }

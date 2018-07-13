@@ -1,6 +1,6 @@
 import Entity from './Entity.js';
 import {createAnimation} from './animation.js';
-import {loadSpriteSheet} from './loaders.js';
+import {loadSpriteSheet} from './loaders/loaders.js';
 import Go from './traits/Go.js';
 import Jump from './traits/Jump.js';
 

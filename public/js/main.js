@@ -7,7 +7,7 @@ import {createMario} from './entities.js';
 import {bindKeyboardControls} from './input.js';
 import {createCameraLayer} from './layers.js';
 import * as tools from './tools.js';
-import {loadLevel} from './loaders.js';
+import {loadLevel} from './loaders/level.js';
 
 const canvas = document.getElementById("coinSlot");
 const context = canvas.getContext("2d");
