@@ -1,0 +1,49 @@
+{
+    "imageURL": "img/tiles.png",
+    "tileW": 16,
+    "tileH": 16,
+    "tiles": [
+        {
+            "name": "chocolate",
+            "index": [0, 3]
+        },
+        {
+            "name": "brick",
+            "index": [1, 2]
+        },
+        {
+            "name": "ground",
+            "index": [0, 2]
+        },
+        {
+            "name": "powerup-1",
+            "index": [24, 2]
+        },
+        {
+            "name": "powerup-2",
+            "index": [25, 2]
+        },
+        {
+            "name": "powerup-3",
+            "index": [26, 2]
+        },
+        {
+            "name": "sky",
+            "index": [13, 3]
+        }
+    ],
+    "animations": [
+        {
+            "name": "powerup",
+            "frameLength": 0.1,
+            "frames": [
+                "powerup-1",
+                "powerup-1",
+                "powerup-1",
+                "powerup-2",
+                "powerup-3",
+                "powerup-2"
+            ]
+        }
+    ]
+}
