@@ -12,6 +12,7 @@ export function createMario() {
         const mario = new Entity();
         mario.size.set(12, 16);
         mario.addTrait(new Go());
+        mario.Go.dragCoefficient = SLOW_DRAG;
         mario.addTrait(new Jump());
         mario.turbo = (turboOn) => {
             mario.Go.dragCoefficient = turboOn ? FAST_DRAG : SLOW_DRAG;

@@ -31,7 +31,7 @@ Promise.all([
     const controller1 = new Gamepad(1);
     const timer = new Timer(1/60);
     timer.update = (deltaTime) => {
-        controller1.checkGamepadForUpdates(mario);
+        //controller1.checkGamepadForUpdates(mario);
         // Different implementation for camera chase
         // let rightOffset = mario.position.x - (camera.position.x + 160);
         // if (rightOffset > 0) {
