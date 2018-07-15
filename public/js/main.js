@@ -7,7 +7,7 @@ import {createMario} from './entities.js';
 import {bindKeyboardControls} from './input.js';
 import {createCameraLayer} from './layers.js';
 import * as tools from './tools.js';
-import {loadLevel} from './loaders.js';
+import {loadLevel} from './loaders/level.js';
 
 const canvas = document.getElementById("coinSlot");
 const context = canvas.getContext("2d");
@@ -31,7 +31,7 @@ Promise.all([
     const controller1 = new Gamepad(1);
     const timer = new Timer(1/60);
     timer.update = (deltaTime) => {
-        controller1.checkGamepadForUpdates(mario);
+        //controller1.checkGamepadForUpdates(mario);
         // Different implementation for camera chase
         // let rightOffset = mario.position.x - (camera.position.x + 160);
         // if (rightOffset > 0) {

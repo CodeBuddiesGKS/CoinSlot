@@ -1,6 +1,6 @@
 import Entity from './Entity.js';
 import {createAnimation} from './animation.js';
-import {loadSpriteSheet} from './loaders.js';
+import {loadSpriteSheet} from './loaders/loaders.js';
 import Go from './traits/Go.js';
 import Jump from './traits/Jump.js';
 
@@ -12,6 +12,7 @@ export function createMario() {
         const mario = new Entity();
         mario.size.set(12, 16);
         mario.addTrait(new Go());
+        mario.Go.dragCoefficient = SLOW_DRAG;
         mario.addTrait(new Jump());
         mario.turbo = (turboOn) => {
             mario.Go.dragCoefficient = turboOn ? FAST_DRAG : SLOW_DRAG;
