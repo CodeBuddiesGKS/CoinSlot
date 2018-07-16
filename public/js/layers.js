@@ -117,7 +117,7 @@ export function createGridLayer(level) {
     };
 }
 
-export function createSpriteLayer(entities, width=64, height=64) {
+export function createSpriteLayer(entities, width=16, height=16) {
     const spriteBuffer = document.createElement('canvas');
     spriteBuffer.width = width;
     spriteBuffer.height = width;
@@ -127,10 +127,11 @@ export function createSpriteLayer(entities, width=64, height=64) {
         entities.forEach(entity => {
             spriteBufferContext.clearRect(0, 0, width, height);
             entity.draw(spriteBufferContext);
+            const spriteXOffset = Math.floor((width - entity.size.x)/2);
 
             context.drawImage(
                 spriteBuffer, 
-                entity.position.x - camera.position.x, 
+                entity.position.x - spriteXOffset - camera.position.x, 
                 entity.position.y - camera.position.y
             );
         });

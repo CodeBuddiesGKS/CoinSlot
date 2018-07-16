@@ -6,11 +6,12 @@ export default class SpriteSheet {
         this.tiles = new Map();
         this.animations = new Map();
     }
-    define(name, x, y, width, height) {
+    define(name, x, y, width, height, widthOffset=0) {
         const buffers = [false, true].map(flip => {
             const buffer = document.createElement('canvas');
             buffer.width = width;
             buffer.height = height;
+            buffer.widthOffset = widthOffset;
             const context = buffer.getContext('2d');
 
             if (flip) {
@@ -34,7 +35,7 @@ export default class SpriteSheet {
     }
     draw(name, context, x, y, flip=false) {
         const buffer = this.tiles.get(name)[flip ? 1:0];
-        context.drawImage(buffer, x, y);
+        context.drawImage(buffer, x+buffer.widthOffset, y);
     }
     drawAnimation(name, context, x, y, distance) {
         const animation = this.animations.get(name);

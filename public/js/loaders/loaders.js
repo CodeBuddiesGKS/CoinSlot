@@ -29,16 +29,12 @@ export function loadSpriteSheet(name) {
         );
         if (sheetSpec.tiles) {
             sheetSpec.tiles.forEach(tileSpec => {
-                sprites.defineTile(
-                    tileSpec.name,
-                    tileSpec.index[0],
-                    tileSpec.index[1]
-                );
+                sprites.defineTile(tileSpec.name, ...tileSpec.index);
             });
         }
         if (sheetSpec.frames) {
             sheetSpec.frames.forEach(frameSpec => {
-                sprites.define(frameSpec.name, ...frameSpec.rect)
+                sprites.define(frameSpec.name, ...frameSpec.rect, frameSpec.widthOffset)
             });
         }
         if (sheetSpec.animations) {
