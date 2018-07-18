@@ -3,9 +3,7 @@ import Compositor from './Compositor.js';
 import Entity from './Entity.js';
 import Gamepad from './Gamepad.js';
 import Timer from './Timer.js';
-import {loadGoomba} from './entities/Goomba.js';
-import {loadKoopa} from './entities/Koopa.js';
-import {loadMario} from './entities/Mario.js';
+import {loadEntities} from './entities.js';
 import {bindKeyboardControls} from './input.js';
 import {createCameraLayer} from './layers.js';
 import {loadLevel} from './loaders/level.js';
@@ -16,29 +14,27 @@ const context = canvas.getContext("2d");
 
 Promise.all([
     loadLevel('1-1'),
-    loadMario(),
-    loadGoomba(),
-    loadKoopa()
-]).then(([level, createMario, createGoomba, createKoopa]) => {
+    loadEntities()
+]).then(([level, entity]) => {
     const camera = new Camera();
 
-    const mario = createMario();
-    mario.position.set(16, 192);
+    const mario = entity.mario();
+    mario.position.set(32, 160);
     level.entities.add(mario);
     bindKeyboardControls(mario);
 
-    const goomba = createGoomba();
+    const goomba = entity.goomba();
     goomba.position.set(64, 192);
     level.entities.add(goomba);
     
-    const koopa = createKoopa();
+    const koopa = entity.koopa();
     koopa.position.set(32, 192); //608
     level.entities.add(koopa);
     
     tools.enableMouseControl(canvas, camera, level, mario);
     //tools.showCamera(level, camera);
-    tools.showCollision(level);
-    tools.showEntityHitbox(level);
+    //tools.showCollision(level);
+    //tools.showEntityHitbox(level);
     //tools.showGrid(level);
 
     const controller1 = new Gamepad(1);

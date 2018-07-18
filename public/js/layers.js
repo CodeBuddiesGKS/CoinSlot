@@ -1,18 +1,5 @@
 import TileResolver from "./TileResolver.js";
 
-export function createCameraLayer(cameraToDraw) {
-    return (context, fromCamera) => {
-        context.strokeStyle = 'purple';
-        context.beginPath();
-        context.strokeRect(
-            cameraToDraw.position.x - fromCamera.position.x,
-            cameraToDraw.position.y - fromCamera.position.y,
-            cameraToDraw.size.x,
-            cameraToDraw.size.y
-        );
-    }
-}
-
 export function createBackgroundLayer(level, tiles, sprites) {
     const resolver = new TileResolver(tiles);
 
@@ -63,6 +50,19 @@ export function createBackgroundLayer(level, tiles, sprites) {
     };
 }
 
+export function createCameraLayer(cameraToDraw) {
+    return (context, fromCamera) => {
+        context.strokeStyle = 'purple';
+        context.beginPath();
+        context.strokeRect(
+            cameraToDraw.position.x - fromCamera.position.x,
+            cameraToDraw.position.y - fromCamera.position.y,
+            cameraToDraw.size.x,
+            cameraToDraw.size.y
+        );
+    }
+}
+
 export function createCollisionLayer(level) {
     const resolvedTiles = [];
 
@@ -97,8 +97,8 @@ export function createEntityHitboxLayer(level) {
         level.entities.forEach(entity => {
             context.beginPath();
             context.strokeRect(
-                entity.position.x - camera.position.x,
-                entity.position.y - camera.position.y,
+                entity.bounds.left - camera.position.x,
+                entity.bounds.top - camera.position.y,
                 entity.size.x,
                 entity.size.y
             );
@@ -128,9 +128,9 @@ export function createSpriteLayer(entities, width=64, height=64) {
             spriteBufferContext.clearRect(0, 0, width, height);
             entity.draw(spriteBufferContext);
             context.drawImage(
-                spriteBuffer, 
-                entity.bounds.left - camera.position.x, 
-                entity.bounds.top - camera.position.y
+                spriteBuffer,
+                entity.position.x - camera.position.x,
+                entity.position.y - camera.position.y
             );
         });
     }

@@ -38,7 +38,7 @@ function createMarioFactory(marioSprite) {
     return () => {
         const mario = new Entity();
         mario.size.set(14, 16);
-        mario.offset.x = -1;
+        mario.offset.x = 1;
         mario.addTrait(new Go());
         mario.addTrait(new Jump());
         mario.turbo = setTurboDrag;
