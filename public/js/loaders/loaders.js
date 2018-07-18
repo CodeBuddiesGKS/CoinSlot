@@ -34,7 +34,7 @@ export function loadSpriteSheet(name) {
         }
         if (sheetSpec.frames) {
             sheetSpec.frames.forEach(frameSpec => {
-                sprites.define(frameSpec.name, ...frameSpec.rect, frameSpec.widthOffset)
+                sprites.define(frameSpec.name, ...frameSpec.rect)
             });
         }
         if (sheetSpec.animations) {

@@ -24,9 +24,11 @@ export default class TileCollider {
                 return;
             }
             if (entity.velocity.x > 0 && x > match.l) {
+                entity.obstruct(Sides.RIGHT);
                 entity.position.x = match.l - entity.size.x;
                 entity.velocity.x = 0;
             } else if (entity.velocity.x < 0 && x < match.r) {
+                entity.obstruct(Sides.LEFT);
                 entity.position.x = match.r;
                 entity.velocity.x = 0;
             }

@@ -117,22 +117,20 @@ export function createGridLayer(level) {
     };
 }
 
-export function createSpriteLayer(entities, width=16, height=16) {
+export function createSpriteLayer(entities, width=64, height=64) {
     const spriteBuffer = document.createElement('canvas');
     spriteBuffer.width = width;
-    spriteBuffer.height = width;
+    spriteBuffer.height = height;
     const spriteBufferContext = spriteBuffer.getContext('2d');
 
     return (context, camera) => {
         entities.forEach(entity => {
             spriteBufferContext.clearRect(0, 0, width, height);
             entity.draw(spriteBufferContext);
-            const spriteXOffset = Math.floor((width - entity.size.x)/2);
-
             context.drawImage(
                 spriteBuffer, 
-                entity.position.x - spriteXOffset - camera.position.x, 
-                entity.position.y - camera.position.y
+                entity.bounds.left - camera.position.x, 
+                entity.bounds.top - camera.position.y
             );
         });
     }
