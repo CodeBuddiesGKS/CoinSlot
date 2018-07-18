@@ -41,11 +41,10 @@ export default class Gamepad {
                     }
                 }
             });
-        } else {
-            console.log('Press any button to connect...');
         }
     }
     findGamepads() {
+        console.log('Press any button to connect...');
         window.addEventListener('gamepadconnected', event => {
             this.pad = event.gamepad;
             console.log('Pad connected!');

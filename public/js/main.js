@@ -3,34 +3,28 @@ import Compositor from './Compositor.js';
 import Entity from './Entity.js';
 import Gamepad from './Gamepad.js';
 import Timer from './Timer.js';
-import {loadEntities} from './entities.js';
+import {loadEntityFactory} from './entities.js';
 import {bindKeyboardControls} from './input.js';
 import {createCameraLayer} from './layers.js';
-import {loadLevel} from './loaders/level.js';
+import {loadLevelFactory} from './loaders/level.js';
 import * as tools from './tools.js';
 
 const canvas = document.getElementById("coinSlot");
 const context = canvas.getContext("2d");
+const marioStartPosition = [32, 160];
 
-Promise.all([
-    loadLevel('1-1'),
-    loadEntities()
-]).then(([level, entity]) => {
-    const camera = new Camera();
-
-    const mario = entity.mario();
-    mario.position.set(32, 160);
+loadEntityFactory()
+.then(entityFactory => Promise.all([
+    loadLevelFactory(entityFactory)('1-1'),
+    entityFactory
+]))
+.then(([level, entityFactory]) => {
+    const mario = entityFactory.mario();
+    mario.position.set(...marioStartPosition);
     level.entities.add(mario);
     bindKeyboardControls(mario);
 
-    const goomba = entity.goomba();
-    goomba.position.set(64, 192);
-    level.entities.add(goomba);
-    
-    const koopa = entity.koopa();
-    koopa.position.set(32, 192); //608
-    level.entities.add(koopa);
-    
+    const camera = new Camera();
     tools.enableMouseControl(canvas, camera, level, mario);
     //tools.showCamera(level, camera);
     //tools.showCollision(level);
@@ -38,32 +32,39 @@ Promise.all([
     //tools.showGrid(level);
 
     const controller1 = new Gamepad(1);
+
     const timer = new Timer(1/60);
     timer.update = (deltaTime) => {
-        //// Shut off gamepad check until wanted
-        // controller1.checkGamepadForUpdates(mario);
-
-        //// Different implementation for camera chase
-        // let rightOffset = mario.position.x - (camera.position.x + 160);
-        // if (rightOffset > 0) {
-        //     camera.position.x += rightOffset;
-        // }
-        // let leftOffset = mario.position.x - (camera.position.x);
-        // if (leftOffset < 0) {
-        //     camera.position.x += leftOffset;
-        // }
-        if (mario.position.x > 100) {
-            camera.position.x = mario.position.x - 100;
-        }
-
-        // resets mario to the beginning if he falls off the map
-        if (mario.position.y > 240) {
-            mario.position.set(16, 192);
-            camera.position.x = 0;
-        }
+        controller1.checkGamepadForUpdates(mario);
+        
+        setupCameraChase(mario, camera);
+        resetMarioWhenOutOfBounds(mario, camera);
 
         level.update(deltaTime);
         level.comp.draw(context, camera);
     };
     timer.start();
 });
+
+function resetMarioWhenOutOfBounds(mario, camera) {
+    if (mario.position.y > 240) {
+        mario.position.set(...marioStartPosition);
+        camera.position.x = 0;
+    }
+}
+
+function setupCameraChase(mario, camera) {
+    if (mario.position.x > 100) {
+        camera.position.x = mario.position.x - 100;
+    }
+
+    //// Different implementation for camera chase
+    // let rightOffset = mario.position.x - (camera.position.x + 160);
+    // if (rightOffset > 0) {
+    //     camera.position.x += rightOffset;
+    // }
+    // let leftOffset = mario.position.x - (camera.position.x);
+    // if (leftOffset < 0) {
+    //     camera.position.x += leftOffset;
+    // }
+}

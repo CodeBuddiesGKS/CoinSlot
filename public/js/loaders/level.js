@@ -23,33 +23,6 @@ function createCollisionGrid(tiles, patterns) {
     return grid;
 }
 
-function expandTiles(tiles, patterns) {
-    const expandedTiles = [];
-
-    function walkTiles(tiles, offsetX, offsetY) {
-        for (const tile of tiles) {
-            for (let {x, y} of expandRanges(tile.ranges)) {
-                const derivedX = x + offsetX;
-                const derivedY = y + offsetY;
-                if (tile.pattern) {
-                    let t = patterns[tile.pattern].tiles;
-                    walkTiles(t, derivedX, derivedY);
-                } else {
-                    expandedTiles.push({
-                        tile: tile, 
-                        x: derivedX,
-                        y: derivedY
-                    });
-                }
-            }
-        }
-    }
-
-    walkTiles(tiles, 0, 0);
-
-    return expandedTiles;
-}
-
 function expandRange(range) {
     if (range.length === 4) {
         const [xStart, xLength, yStart, yLength] = range;
@@ -65,9 +38,7 @@ function expandRange(range) {
 
 function* expandRanges(ranges) {
     for (const range of ranges) {
-        for (const item of expandRange(range)) {
-            yield item;
-        }
+        yield* expandRange(range)
     }
 }
 
@@ -83,35 +54,69 @@ function* expandSpan(xStart, xLength, yStart, yLength) {
     }
 }
 
-export function loadLevel(name) {
-    return loadJSON(`../levels/${name}.json`)
-        .then(levelSpec => Promise.all([
-            levelSpec,
-            loadSpriteSheet(levelSpec.spriteSheet)
-        ]))
-        .then(([levelSpec, backgroundSprites]) => {
-            const level = new Level();
+function* expandTiles(tiles, patterns) {
+    function* walkTiles(tiles, offsetX, offsetY) {
+        for (const tile of tiles) {
+            for (let {x, y} of expandRanges(tile.ranges)) {
+                const derivedX = x + offsetX;
+                const derivedY = y + offsetY;
+                if (tile.pattern) {
+                    let t = patterns[tile.pattern].tiles;
+                    yield* walkTiles(t, derivedX, derivedY);
+                } else {
+                    yield {
+                        tile: tile, 
+                        x: derivedX,
+                        y: derivedY
+                    };
+                }
+            }
+        }
+    }
+    yield* walkTiles(tiles, 0, 0);
+}
 
-            //Merge all layers for collsion detection
-            const mergedTiles = levelSpec.layers.reduce((mergedTiles, layerSpec) => {
-                return mergedTiles.concat(layerSpec.tiles);
-            }, []);
+export function loadLevelFactory(entityFactory) {
+    return function loadLevel(name) {
+        return loadJSON(`../levels/${name}.json`)
+            .then(levelSpec => Promise.all([
+                levelSpec,
+                loadSpriteSheet(levelSpec.spriteSheet)
+            ]))
+            .then(([levelSpec, backgroundSprites]) => {
+                const level = new Level();
 
-            //Collision Layer
-            const collisionGrid = createCollisionGrid(mergedTiles, levelSpec.patterns);
-            level.setCollisionGrid(collisionGrid);
+                setupCollision(levelSpec, level);
+                setupBackgroundLayers(levelSpec, level, backgroundSprites);
+                setupEntityLayer(levelSpec, level, entityFactory);
 
-            //Background Layer
-            levelSpec.layers.forEach(layer => {
-                const backgroundGrid = createBackgroundGrid(layer.tiles, levelSpec.patterns);
-                const backgroundLayer = createBackgroundLayer(level, backgroundGrid, backgroundSprites);
-                level.comp.layers.push(backgroundLayer);
+                return level;
             });
+    }
+}
 
-            //Sprite Layer
-            const spriteLayer = createSpriteLayer(level.entities);
-            level.comp.layers.push(spriteLayer);
+function setupBackgroundLayers(levelSpec, level, backgroundSprites) {
+    levelSpec.layers.forEach(layer => {
+        const backgroundGrid = createBackgroundGrid(layer.tiles, levelSpec.patterns);
+        const backgroundLayer = createBackgroundLayer(level, backgroundGrid, backgroundSprites);
+        level.comp.layers.push(backgroundLayer);
+    });
+}
 
-            return level;
-        });
+function setupCollision(levelSpec, level) {
+    const mergedTiles = levelSpec.layers.reduce((mergedTiles, layerSpec) => {
+        return mergedTiles.concat(layerSpec.tiles);
+    }, []);
+    const collisionGrid = createCollisionGrid(mergedTiles, levelSpec.patterns);
+    level.setCollisionGrid(collisionGrid);
+}
+
+function setupEntityLayer(levelSpec, level, entityFactory) {
+    levelSpec.entities.forEach(entitySpec => {
+        const e = entityFactory[entitySpec.name]();
+        e.position.set(...entitySpec.position);
+        level.entities.add(e);
+    });
+    const spriteLayer = createSpriteLayer(level.entities);
+    level.comp.layers.push(spriteLayer);
 }

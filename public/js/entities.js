@@ -2,7 +2,7 @@ import {loadGoomba} from './entities/Goomba.js';
 import {loadKoopa} from './entities/Koopa.js';
 import {loadMario} from './entities/Mario.js';
 
-export function loadEntities() {
+export function loadEntityFactory() {
     const entityFactories = {};
 
     function addFactory(name) {

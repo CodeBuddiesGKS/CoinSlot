@@ -8,6 +8,7 @@ export default class Level {
         this.gravity = 1500;
         this.totalTime = 0;
         this.tileCollider = null;
+        this.enemies;
     }
     setCollisionGrid(matrix) {
         this.tileCollider = new TileCollider(matrix);
