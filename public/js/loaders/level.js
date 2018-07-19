@@ -76,7 +76,7 @@ function* expandTiles(tiles, patterns) {
     yield* walkTiles(tiles, 0, 0);
 }
 
-export function loadLevelFactory(entityFactory) {
+export function createLevelFactory(entityFactory) {
     return function loadLevel(name) {
         return loadJSON(`../levels/${name}.json`)
             .then(levelSpec => Promise.all([
@@ -112,10 +112,10 @@ function setupCollision(levelSpec, level) {
 }
 
 function setupEntityLayer(levelSpec, level, entityFactory) {
-    levelSpec.entities.forEach(entitySpec => {
-        const e = entityFactory[entitySpec.name]();
-        e.position.set(...entitySpec.position);
-        level.entities.add(e);
+    levelSpec.entities.forEach(({name, position: [x, y]}) => {
+        const entity = entityFactory[name]();
+        entity.position.set(x, y);
+        level.entities.add(entity);
     });
     const spriteLayer = createSpriteLayer(level.entities);
     level.comp.layers.push(spriteLayer);

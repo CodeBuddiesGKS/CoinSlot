@@ -6,32 +6,32 @@ import Timer from './Timer.js';
 import {loadEntityFactory} from './entities.js';
 import {bindKeyboardControls} from './input.js';
 import {createCameraLayer} from './layers.js';
-import {loadLevelFactory} from './loaders/level.js';
+import {createLevelFactory} from './loaders/level.js';
 import * as tools from './tools.js';
 
 const canvas = document.getElementById("coinSlot");
-const context = canvas.getContext("2d");
 const marioStartPosition = [32, 160];
+main(canvas);
 
-loadEntityFactory()
-.then(entityFactory => Promise.all([
-    loadLevelFactory(entityFactory)('1-1'),
-    entityFactory
-]))
-.then(([level, entityFactory]) => {
+async function main(canvas) {
+    const camera = new Camera();
+    const context = canvas.getContext("2d");
+    const controller1 = new Gamepad(1);
+
+    const entityFactory = await loadEntityFactory();
+    const levelFactory = createLevelFactory(entityFactory);
+    const level = await levelFactory('1-1');
+
     const mario = entityFactory.mario();
     mario.position.set(...marioStartPosition);
     level.entities.add(mario);
     bindKeyboardControls(mario);
 
-    const camera = new Camera();
     tools.enableMouseControl(canvas, camera, level, mario);
     //tools.showCamera(level, camera);
     //tools.showCollision(level);
     //tools.showEntityHitbox(level);
     //tools.showGrid(level);
-
-    const controller1 = new Gamepad(1);
 
     const timer = new Timer(1/60);
     timer.update = (deltaTime) => {
@@ -44,7 +44,7 @@ loadEntityFactory()
         level.comp.draw(context, camera);
     };
     timer.start();
-});
+}
 
 function resetMarioWhenOutOfBounds(mario, camera) {
     if (mario.position.y > 240) {
@@ -54,17 +54,18 @@ function resetMarioWhenOutOfBounds(mario, camera) {
 }
 
 function setupCameraChase(mario, camera) {
+    //// Testing Chase
     if (mario.position.x > 100) {
         camera.position.x = mario.position.x - 100;
     }
 
-    //// Different implementation for camera chase
-    // let rightOffset = mario.position.x - (camera.position.x + 160);
+    //// Real Chase
+    // let rightOffset = mario.position.x - (camera.position.x + (canvas.width/2) - (mario.size.x/2));
     // if (rightOffset > 0) {
     //     camera.position.x += rightOffset;
     // }
-    // let leftOffset = mario.position.x - (camera.position.x);
-    // if (leftOffset < 0) {
-    //     camera.position.x += leftOffset;
+    // if (mario.bounds.left < camera.position.x) {
+    //     mario.bounds.left = camera.position.x;
+    //     mario.velocity.x = 0;
     // }
 }
