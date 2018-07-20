@@ -7,6 +7,14 @@
     {
       "name": "walk-2",
       "rect": [315, 206, 16, 24]
+    },
+    {
+      "name": "shell",
+      "rect": [144, 206, 16, 24]
+    },
+    {
+      "name": "shell-with-legs",
+      "rect": [163, 206, 16, 24]
     }
   ],
   "animations": [{

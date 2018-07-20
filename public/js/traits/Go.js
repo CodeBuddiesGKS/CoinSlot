@@ -10,7 +10,7 @@ export default class Go extends Trait {
         this.heading = 1;
         this.dragCoefficient;
     }
-    update(entity, deltaTime) {
+    update(entity, deltaTime, level) {
         const absX = Math.abs(entity.velocity.x);
 
         if (this.dir !== 0) {

@@ -4,6 +4,12 @@ export default class BoundingBox {
         this.size = size;
         this.offset = offset;
     }
+    overlaps(box) {
+        return this.top <= box.bottom
+            && this.bottom >= box.top
+            && this.left <= box.right
+            && this.right >= box.left;
+    }
     get top() {
         return this.position.y + this.offset.y;
     }
@@ -27,5 +33,11 @@ export default class BoundingBox {
     }
     set right(x) {
         this.position.x = x - this.size.x - this.offset.x
+    }
+    get centerX() {
+        return this.position.x + this.offset.x + Math.floor(this.size.x/2);
+    }
+    get centerY() {
+        return this.position.y + this.offset.y + Math.floor(this.size.y/2);
     }
 }

@@ -27,7 +27,7 @@ export default class Jump extends Trait {
             this.cancel();
         }
     }
-    update(entity, deltaTime) {
+    update(entity, deltaTime, level) {
         if (this.requestTime > 0) {
             if (this.airTime < 0) {
                 this.engageTime = this.duration;

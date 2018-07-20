@@ -1,12 +1,11 @@
 export default class Gamepad {
-    constructor(playerNumber) {
+    constructor() {
         this.buttonStates = new Map();
         this.pad;
-        this.playerNumber = playerNumber - 1;
         this.findGamepads();
     }
-    checkGamepadForUpdates(entity) {
-        this.pad = navigator.getGamepads()[this.playerNumber];
+    checkActivity(entity) {
+        this.pad = navigator.getGamepads()[0];
         if (this.pad) {
             this.pad.buttons.forEach((button, bIndex) => {
                 let prevState = this.buttonStates.get(bIndex);
@@ -46,7 +45,6 @@ export default class Gamepad {
     findGamepads() {
         console.log('Press any button to connect...');
         window.addEventListener('gamepadconnected', event => {
-            this.pad = event.gamepad;
             console.log('Pad connected!');
         });
     }
