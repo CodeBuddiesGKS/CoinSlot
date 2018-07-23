@@ -1,6 +1,8 @@
 import Entity, {Trait} from '../Entity.js';
 import Killable from '../traits/Killable.js';
-import PendulumWalk from '../traits/PendulumWalk.js';
+import PendulumMove from '../traits/PendulumMove.js';
+import Physics from '../traits/Physics.js';
+import Solid from '../traits/Solid.js';
 import {loadSpriteSheet} from '../loaders/loaders.js';
 
 export function loadGoomba() {
@@ -28,8 +30,10 @@ function createGoombaFactory(goombaSprite) {
         const goomba = new Entity();
         goomba.size.set(16, 16);
         goomba.addTrait(new Behavior());
-        goomba.addTrait(new Killable());
-        goomba.addTrait(new PendulumWalk());
+        goomba.addTrait(new Killable(0.4));
+        goomba.addTrait(new PendulumMove());
+        goomba.addTrait(new Physics());
+        goomba.addTrait(new Solid());
         goomba.draw = drawGoomba;
         return goomba;
     }
@@ -40,17 +44,21 @@ class Behavior extends Trait {
         super('Behavior');
     }
     collides(goomba, them) {
-        if (goomba.Killable.isDead) {
+        const isStomping = them.velocity.y > goomba.velocity.y;
+        if (!them.Killable
+            || (them.Killable && them.Killable.isDead)
+            || (goomba.Killable && goomba.Killable.isDead)) {
             return;
         }
         if (them.Stomp) {
-            if (them.velocity.y > goomba.velocity.y) {
-                goomba.PendulumWalk.enabled = 0;
+            if (isStomping) {
+                goomba.PendulumMove.enabled = 0;
                 goomba.Killable.kill();
-                them.Stomp.bounce();
             } else {
                 them.Killable.kill();
             }
+        } else {
+            goomba.PendulumMove.dir = -goomba.PendulumMove.dir;
         }
     }
 }

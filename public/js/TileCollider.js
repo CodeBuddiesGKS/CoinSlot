@@ -24,13 +24,9 @@ export default class TileCollider {
                 return;
             }
             if (entity.velocity.x > 0 && x > match.l) {
-                entity.bounds.right = match.l;
-                entity.velocity.x = 0;
-                entity.obstruct(Sides.RIGHT);
+                entity.obstruct(Sides.RIGHT, match);
             } else if (entity.velocity.x < 0 && x < match.r) {
-                entity.bounds.left = match.r;
-                entity.velocity.x = 0;
-                entity.obstruct(Sides.LEFT);
+                entity.obstruct(Sides.LEFT, match);
             }
         });
     }
@@ -53,13 +49,9 @@ export default class TileCollider {
                 return;
             }
             if (entity.velocity.y > 0 && y > match.t) {
-                entity.bounds.bottom = match.t;
-                entity.velocity.y = 0;
-                entity.obstruct(Sides.BOTTOM);
+                entity.obstruct(Sides.BOTTOM, match);
             } else if (entity.velocity.y < 0 && y < match.b) {
-                entity.bounds.top = match.b;
-                entity.velocity.y = 0;
-                entity.obstruct(Sides.TOP);
+                entity.obstruct(Sides.TOP, match);
             }
         });
     }

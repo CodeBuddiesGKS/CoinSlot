@@ -1,6 +1,8 @@
 import Entity, {Trait} from '../Entity.js';
 import Killable from '../traits/Killable.js';
-import PendulumWalk from '../traits/PendulumWalk.js';
+import PendulumMove from '../traits/PendulumMove.js';
+import Physics from '../traits/Physics.js';
+import Solid from '../traits/Solid.js';
 import {loadSpriteSheet} from '../loaders/loaders.js';
 
 const STATE_WALKING = Symbol('walking');
@@ -29,7 +31,7 @@ function createKoopaFactory(koopaSprite) {
     }
 
     function drawKoopa(context) {
-        const flip = this.PendulumWalk.dir === -1;
+        const flip = this.PendulumMove.dir === -1;
         const frame = getAnimationFrame(this);
         koopaSprite.draw(frame, context, 0, 0, flip);
     }
@@ -39,9 +41,10 @@ function createKoopaFactory(koopaSprite) {
         koopa.size.set(16, 16);
         koopa.offset.y = 8;
         koopa.addTrait(new Behavior());
-        koopa.addTrait(new Killable());
-        koopa.addTrait(new PendulumWalk());
-        koopa.Killable.decomposeTime = 400;
+        koopa.addTrait(new Killable(2));
+        koopa.addTrait(new PendulumMove());
+        koopa.addTrait(new Physics());
+        koopa.addTrait(new Solid());
         koopa.draw = drawKoopa;
         return koopa;
     }
@@ -58,20 +61,29 @@ class Behavior extends Trait {
     }
     collides(koopa, them) {
         const isStomping = them.velocity.y > koopa.velocity.y;
-
-        if (koopa.Killable.isDead) {
+        if (!them.Killable
+            || (them.Killable && them.Killable.isDead)
+            || (koopa.Killable && koopa.Killable.isDead)) {
             return;
         }
-
-        if (this.state === STATE_SLIDING
-            && them.Killable) {
-            them.Killable.kill();
-        }
+        // this.state = STATE_HIDING;
+        // koopa.Killable.kill();
+        // koopa.velocity.set(100, -200);
+        // koopa.Solid.obstructs = false;
 
         if (them.Stomp) {
             if (isStomping) {
-                if (this.state === STATE_WALKING) {
-                    this.setStateToHide(koopa, them);
+                switch (this.state) {
+                    case STATE_WALKING:
+                        this.setStateToHide(koopa, them);
+                        break;
+                    case STATE_HIDING:
+                    case STATE_WAKING:
+                        this.setStateToSlide(koopa, them);
+                        break;
+                    case STATE_SLIDING:
+                        this.setStateToHide(koopa, them);
+                        break;
                 }
             } else {
                 switch (this.state) {
@@ -82,26 +94,47 @@ class Behavior extends Trait {
                     case STATE_WAKING:
                         this.setStateToSlide(koopa, them);
                         break;
+                    case STATE_SLIDING:
+                        them.Killable.kill();
+                        break;
                 }
             }
+        } else {
+            switch (this.state) {
+                case STATE_WALKING:
+                    this.enemyRicochet(koopa, them);
+                    break;
+                case STATE_SLIDING:
+                    them.PendulumMove.enabled = 0;
+                    them.Killable.kill();
+                    break;
+            }
+        }
+    }
+    enemyRicochet(koopa, them) {
+        if (koopa.PendulumMove.dir === 1) {
+            koopa.PendulumMove.dir = -1;
+            koopa.bounds.right = them.bounds.left - 1;
+        } else {
+            koopa.PendulumMove.dir = 1;
+            koopa.bounds.left = them.bounds.right + 1;
         }
     }
     setStateToHide(koopa, them) {
         this.state = STATE_HIDING;
-        them.bounds.bottom = koopa.bounds.top + 1;
-        them.Stomp.bounce();
         this.hideTime = 0;
-        koopa.PendulumWalk.enabled = 0;
+        koopa.PendulumMove.enabled = 0;
+        koopa.PendulumMove.speed = koopa.PendulumMove.walkSpeed;
     }
     setStateToSlide(koopa, them) {
         this.state = STATE_SLIDING;
-        koopa.PendulumWalk.enabled = 1;
-        koopa.PendulumWalk.speed = 200;
+        koopa.PendulumMove.enabled = 1;
+        koopa.PendulumMove.speed = koopa.PendulumMove.slideSpeed;
         if (them.bounds.centerX < koopa.bounds.centerX) {
-            koopa.PendulumWalk.dir = 1;
+            koopa.PendulumMove.dir = 1;
             koopa.bounds.left = them.bounds.right + 1;
         } else {
-            koopa.PendulumWalk.dir = -1;
+            koopa.PendulumMove.dir = -1;
             koopa.bounds.right = them.bounds.left - 1;
         }
     }
@@ -111,7 +144,7 @@ class Behavior extends Trait {
     }
     setStateToWalk(koopa) {
         this.state = STATE_WALKING;
-        koopa.PendulumWalk.enabled = 1;
+        koopa.PendulumMove.enabled = 1;
     }
     update(entity, deltaTime, level) {
         if (this.state === STATE_HIDING) {

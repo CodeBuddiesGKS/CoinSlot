@@ -29,9 +29,14 @@ export default class Entity {
         });
     }
     draw() {}
-    obstruct(side) {
+    finalize() {
         this.traits.forEach(trait => {
-            trait.obstruct(this, side);
+            trait.finalize();
+        });
+    }
+    obstruct(side, match) {
+        this.traits.forEach(trait => {
+            trait.obstruct(this, side, match);
         });
     }
     update(deltaTime, level) {
@@ -46,8 +51,16 @@ export default class Entity {
 export class Trait {
     constructor(name) {
         this.NAME = name;
+        this.tasks = [];
     }
     collides(us, them) {}
-    obstruct() {}
+    finalize() {
+        this.tasks.forEach(task => task());
+        this.tasks.length = 0;
+    }
+    obstruct(entity, side, match) {}
+    queue(task) {
+        this.tasks.push(task);
+    }
     update() {}
 }

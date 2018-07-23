@@ -11,7 +11,6 @@ import {createLevelFactory} from './loaders/level.js';
 import * as tools from './tools.js';
 
 const canvas = document.getElementById("coinSlot");
-const marioStartPosition = [32, 160];
 main(canvas);
 
 async function main(canvas) {
@@ -34,7 +33,7 @@ async function main(canvas) {
     // tools.enableMouseControl(canvas, camera, level, mario);
     // tools.showCamera(level, camera);
     // tools.showCollision(level);
-    // tools.showEntityHitbox(level);
+    tools.showEntityHitbox(level);
     // tools.showGrid(level);
 
     const timer = new Timer(1/60);

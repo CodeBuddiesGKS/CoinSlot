@@ -4,15 +4,19 @@ export default class Stomp extends Trait {
     constructor() {
         super('Stomp');
         this.bounceSpeed = 200;
-        this.queueBounce = false;
     }
-    bounce() {
-        this.queueBounce = true;
+    bounce(us, them) {
+        us.bounds.bottom = them.bounds.top - 1;
+        us.velocity.y = -this.bounceSpeed;
     }
-    update(entity, deltaTime, level) {
-        if (this.queueBounce) {
-            entity.velocity.y = -this.bounceSpeed;
-            this.queueBounce = false;
+    collides(us, them) {
+        if (!them.Killable
+            || (them.Killable && them.Killable.isDead)
+            || (us.Killable && us.Killable.isDead)) {
+            return;
+        }
+        if (us.velocity.y > them.velocity.y) {
+            this.bounce(us, them);
         }
     }
 }
