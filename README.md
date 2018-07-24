@@ -14,3 +14,4 @@ A suite of arcade games written in vanilla JS.
 * Tower Defense
 * Pong
 * Tetris
+* Worlds Hardest Game
