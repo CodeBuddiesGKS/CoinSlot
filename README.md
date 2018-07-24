@@ -9,7 +9,8 @@ A suite of arcade games written in vanilla JS.
 5. If it doesn't work, check to make sure your browser version supports ES6 (specifically Modules)
 
 ## Game List:
-* Super Mario
+* Super Mario Bros
+* Super Goomba Bros - Where you play as a goomba that tries to not die
 * Legend of Zelda
 * Tower Defense
 * Pong
