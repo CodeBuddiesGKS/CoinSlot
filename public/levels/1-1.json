@@ -1,8 +1,76 @@
 {
   "spriteSheet": "overworld",
   "patterns": {
-    "cloud-single": {
-      "tiles": [{
+    "cloud-1w": {
+      "tiles": [
+        {
+          "pattern": "cloud-left",
+          "ranges" : [
+            [0, 0]
+          ]
+        },
+        {
+          "pattern": "cloud-middle",
+          "ranges" : [
+            [1, 0]
+          ]
+        },
+        {
+          "pattern": "cloud-right",
+          "ranges" : [
+            [2, 0]
+          ]
+        }
+      ]
+    },
+    "cloud-2w": {
+      "tiles": [
+        {
+          "pattern": "cloud-left",
+          "ranges" : [
+            [0, 0]
+          ]
+        },
+        {
+          "pattern": "cloud-middle",
+          "ranges" : [
+            [1, 0],
+            [2, 0]
+          ]
+        },
+        {
+          "pattern": "cloud-right",
+          "ranges" : [
+            [3, 0]
+          ]
+        }]
+    },
+    "cloud-3w": {
+      "tiles": [
+        {
+          "pattern": "cloud-left",
+          "ranges" : [
+            [0, 0]
+          ]
+        },
+        {
+          "pattern": "cloud-middle",
+          "ranges" : [
+            [1, 0],
+            [2, 0],
+            [3, 0]
+          ]
+        },
+        {
+          "pattern": "cloud-right",
+          "ranges" : [
+            [4, 0]
+          ]
+        }]
+    },
+    "cloud-left": {
+      "tiles": [
+        {
           "name": "cloud-1-1",
           "type": "",
           "ranges": [
@@ -13,35 +81,43 @@
           "name": "cloud-1-2",
           "type": "",
           "ranges": [
-            [1, 0]
+            [0, 1]
           ]
-        },
-        {
-          "name": "cloud-1-3",
-          "type": "",
-          "ranges": [
-            [2, 0]
-          ]
-        },
+        }
+      ]
+    },
+    "cloud-middle": {
+      "tiles": [
         {
           "name": "cloud-2-1",
           "type": "",
           "ranges": [
-            [0, 1]
+            [0, 0]
           ]
         },
         {
           "name": "cloud-2-2",
           "type": "",
           "ranges": [
-            [1, 1]
+            [0, 1]
+          ]
+        }
+      ]
+    },
+    "cloud-right": {
+      "tiles": [
+        {
+          "name": "cloud-3-1",
+          "type": "",
+          "ranges": [
+            [0, 0]
           ]
         },
         {
-          "name": "cloud-2-3",
+          "name": "cloud-3-2",
           "type": "",
           "ranges": [
-            [2, 1]
+            [0, 1]
           ]
         }
       ]
@@ -270,7 +346,7 @@
           ]
         },
         {
-          "pattern": "cloud-single",
+          "pattern": "cloud-2w",
           "ranges": [
             [4, 2],
             [25, 2],

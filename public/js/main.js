@@ -6,7 +6,8 @@ import Keyboard from './Keyboard.js';
 import Spawn from './traits/Spawn.js';
 import Timer from './Timer.js';
 import {loadEntityFactory} from './entities.js';
-import {createCameraLayer} from './layers.js';
+import {createDashboardLayer} from './layers/dashboard.js';
+import {loadFont} from './loaders/font.js';
 import {createLevelFactory} from './loaders/level.js';
 import * as tools from './tools.js';
 
@@ -19,9 +20,14 @@ async function main(canvas) {
     const controller = new Gamepad();
     const keyboard = new Keyboard();
 
-    const entityFactory = await loadEntityFactory();
+    const [entityFactory, font] = await Promise.all([
+        loadEntityFactory(),
+        loadFont()
+    ]);
+
     const levelFactory = createLevelFactory(entityFactory);
     const level = await levelFactory('1-1');
+    level.comp.layers.push(createDashboardLayer(font));
 
     const mario = entityFactory.mario();
     keyboard.bindControls(mario);
@@ -31,10 +37,9 @@ async function main(canvas) {
 
     //// Tools
     // tools.enableMouseControl(canvas, camera, level, mario);
-    // tools.showCamera(level, camera);
-    // tools.showCollision(level);
-    tools.showEntityHitbox(level);
-    // tools.showGrid(level);
+    // tools.showCameraBox(level, camera);
+    // tools.showTileCollision(level);
+    // tools.showBoundingBox(level);
 
     const timer = new Timer(1/60);
     timer.update = (deltaTime) => {

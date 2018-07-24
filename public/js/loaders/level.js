@@ -1,7 +1,8 @@
 import Level from '../Level.js';
-import {createBackgroundLayer, createSpriteLayer} from '../layers.js';
 import {loadJSON, loadSpriteSheet} from './loaders.js';
 import {Matrix} from '../math.js';
+import {createBackgroundLayer} from '../layers/background.js';
+import {createSpriteLayer} from '../layers/sprite.js';
 
 function createBackgroundGrid(tiles, patterns) {
     const grid = new Matrix();
