@@ -16,6 +16,20 @@ export function enableMouseControl(canvas, camera, level, entity) {
                 event.offsetX/screenWidthRatio + camera.position.x,
                 event.offsetY/screenHeightRatio + camera.position.y
             );
+        } else if (event.buttons === 2) {
+            let screenX = Math.floor((event.offsetX/screenWidthRatio) / 16);
+            let screenY = Math.floor((event.offsetY/screenHeightRatio) / 16);
+            if (screenX === 0 && screenY === 14) {
+                let roundedPos = Math.floor(camera.position.x / 256) * 256;
+                camera.position.x = Math.max(0, roundedPos - 256);
+            } else if (screenX === 15 && screenY === 14) {
+                let roundedPos = Math.floor(camera.position.x / 256) * 256;
+                camera.position.x = roundedPos + 256;
+            }
+        } else if (event.buttons === 4) {
+            let x = Math.floor((event.offsetX/screenWidthRatio + camera.position.x) / 16);
+            let y = Math.floor((event.offsetY/screenHeightRatio + camera.position.y) / 16);
+            console.log('Coords', x, y);
         }
     });
     canvas.addEventListener('mousemove', event => {

@@ -7,6 +7,46 @@
       "index": [1, 0]
     },
     {
+      "name": "bush-left",
+      "index": [11, 9]
+    },
+    {
+      "name": "bush-middle",
+      "index": [12, 9]
+    },
+    {
+      "name": "bush-right",
+      "index": [13, 9]
+    },
+    {
+      "name": "castle-top-open",
+      "index": [12, 0]
+    },
+    {
+      "name": "castle-top-closed",
+      "index": [12, 1]
+    },
+    {
+      "name": "castle-window-left",
+      "index": [13, 0]
+    },
+    {
+      "name": "castle-window-right",
+      "index": [15, 0]
+    },
+    {
+      "name": "castle-arch",
+      "index": [13, 1]
+    },
+    {
+      "name": "castle-crumble",
+      "index": [14, 0]
+    },
+    {
+      "name": "castle-void",
+      "index": [14, 1]
+    },
+    {
       "name": "chocolate",
       "index": [0, 1]
     },
@@ -35,8 +75,36 @@
       "index": [2, 21]
     },
     {
+      "name": "flag-pole-top",
+      "index": [16, 8]
+    },
+    {
+      "name": "flag-pole-body",
+      "index": [16, 9]
+    },
+    {
       "name": "ground",
       "index": [0, 0]
+    },
+    {
+      "name": "hill-left",
+      "index": [8, 8]
+    },
+    {
+      "name": "hill-top",
+      "index": [9, 8]
+    },
+    {
+      "name": "hill-right",
+      "index": [10, 8]
+    },
+    {
+      "name": "hill-middle-spot",
+      "index": [8, 9]
+    },
+    {
+      "name": "hill-middle",
+      "index": [9, 9]
     },
     {
       "name": "pipe-vert-cap-left",

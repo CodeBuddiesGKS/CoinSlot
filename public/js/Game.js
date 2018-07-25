@@ -49,7 +49,7 @@ export default class Game {
         this.level.entities.add(this.players[0]);
     
         //// Tools
-        // tools.enableMouseControl(canvas, this.camera, this.level, this.currPlayer.Play.avatar);
+        tools.enableMouseControl(canvas, this.camera, this.level, this.currPlayer.PlayState.avatar);
         // tools.showCameraBox(this.level, this.camera);
         // tools.showTileCollision(this.level);
         // tools.showBoundingBox(this.level);

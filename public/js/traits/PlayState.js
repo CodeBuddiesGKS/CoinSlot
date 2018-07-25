@@ -16,7 +16,7 @@ export default class PlayState extends Trait {
     update(entity, deltaTime, level) {
         if (level.entities.has(this.avatar)) {
             if (this.time > 0) {
-                this.time -= deltaTime * 3;
+                //this.time -= deltaTime * 3;
                 this.followAvatar(this.avatar);
             } else {
                 this.time = 0;
@@ -37,24 +37,24 @@ export default class PlayState extends Trait {
     }
     followAvatar(avatar) {
         //// Testing Chase
-        // if (avatar.position.x > 100) {
-        //     this.camera.position.x = Math.max(0, avatar.position.x - 100);
-        // }
+        if (avatar.position.x > 100) {
+            this.camera.position.x = Math.max(0, avatar.position.x - 100);
+        }
         //// Real Chase
-        const halfEntity = avatar.size.x/2;
-        const halfScreen = 256/2;
-        const chasePoint = halfScreen - halfEntity;
-        const isEntityPastChasePoint = avatar.position.x > chasePoint + this.camera.position.x;
+        // const halfEntity = avatar.size.x/2;
+        // const halfScreen = 256/2;
+        // const chasePoint = halfScreen - halfEntity;
+        // const isEntityPastChasePoint = avatar.position.x > chasePoint + this.camera.position.x;
         
-        if (isEntityPastChasePoint) {
-            this.camera.position.x = avatar.position.x - chasePoint;
-        } else if (avatar.position.x < 0) {
-            this.camera.position.x = 0;
-        }
+        // if (isEntityPastChasePoint) {
+        //     this.camera.position.x = avatar.position.x - chasePoint;
+        // } else if (avatar.position.x < 0) {
+        //     this.camera.position.x = 0;
+        // }
 
-        if (avatar.bounds.left < this.camera.position.x) {
-            avatar.bounds.left = this.camera.position.x;
-            avatar.velocity.x = 0;
-        }
+        // if (avatar.bounds.left < this.camera.position.x) {
+        //     avatar.bounds.left = this.camera.position.x;
+        //     avatar.velocity.x = 0;
+        // }
     }
 }
