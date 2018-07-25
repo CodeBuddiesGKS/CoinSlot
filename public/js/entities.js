@@ -1,6 +1,6 @@
 import {loadGoomba} from './entities/Goomba.js';
 import {loadKoopa} from './entities/Koopa.js';
-import {loadMario} from './entities/Mario.js';
+import {loadAvatar} from './entities/Avatar.js';
 
 export function loadEntityFactory() {
     const entityFactories = {};
@@ -10,9 +10,10 @@ export function loadEntityFactory() {
     }
 
     return Promise.all([
+        loadAvatar('mario').then(addFactory('mario')),
+        loadAvatar('luigi').then(addFactory('luigi')),
         loadGoomba().then(addFactory('goomba')),
-        loadKoopa().then(addFactory('koopa')),
-        loadMario().then(addFactory('mario'))
+        loadKoopa().then(addFactory('koopa'))
     ])
     .then(() => entityFactories);
 }
