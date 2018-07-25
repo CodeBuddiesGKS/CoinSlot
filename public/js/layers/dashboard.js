@@ -5,16 +5,16 @@ export function createDashboardLayer(font, player) {
     return (context) => {
         
         font.print('MARIO', context, 16, LINE1);
-        font.print(player.Play.score.toString().padStart(6, '0'), context, 16, LINE2);
+        font.print(player.PlayState.score.toString().padStart(6, '0'), context, 16, LINE2);
 
         font.print('COINS', context, 90, LINE1);
-        font.print(('@x' + player.Play.coins.toString().padStart(2, '0')), context, 90, LINE2);
+        font.print(('@x' + player.PlayState.coins.toString().padStart(2, '0')), context, 90, LINE2);
         
         font.print('WORLD', context, 152, LINE1);
-        font.print(player.Play.world, context, 160, LINE2);
+        font.print(player.PlayState.world, context, 160, LINE2);
         
         font.print('TIME', context, 208, LINE1);
-        font.print(' ' + player.Play.time.toFixed().toString().padStart(3, '0'), context, 208, LINE2);
+        font.print(' ' + player.PlayState.time.toFixed().toString().padStart(3, '0'), context, 208, LINE2);
     }
 }
 

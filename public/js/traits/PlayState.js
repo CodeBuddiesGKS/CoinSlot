@@ -1,9 +1,9 @@
 import {Trait} from '../Entity.js';
 import {Vector} from '../math.js';
 
-export default class Play extends Trait {
+export default class PlayState extends Trait {
     constructor(entity, camera) {
-        super('Play');
+        super('PlayState');
         this.avatar = entity;
         this.camera = camera;
         this.checkpoint = new Vector(0, 0);

@@ -3,7 +3,7 @@ import Compositor from './Compositor.js';
 import Entity from './Entity.js';
 import Gamepad from './Gamepad.js';
 import Keyboard from './Keyboard.js';
-import Play from './traits/Play.js';
+import PlayState from './traits/PlayState.js';
 import Timer from './Timer.js';
 import {loadEntityFactory} from './entities.js';
 import {createDashboardLayer} from './layers/dashboard.js';
@@ -29,16 +29,16 @@ export default class Game {
 
         const mario = entityFactory.mario();
         this.players.push(new Entity());
-        this.players[0].addTrait(new Play(mario, this.camera));
-        this.players[0].Play.checkpoint.set(32, 160);
+        this.players[0].addTrait(new PlayState(mario, this.camera));
+        this.players[0].PlayState.checkpoint.set(32, 160);
         this.currPlayer = this.players[0];
-        this.keyboard.bindControls(this.currPlayer.Play.avatar);
+        this.keyboard.bindControls(this.currPlayer.PlayState.avatar);
 
         if (isTwoPlayers) {
             const luigi = entityFactory.luigi();
             this.players.push(new Entity());
-            this.players[1].addTrait(new Play(luigi, this.camera));
-            this.players[1].Play.checkpoint.set(32, 160);
+            this.players[1].addTrait(new PlayState(luigi, this.camera));
+            this.players[1].PlayState.checkpoint.set(32, 160);
         }
 
         const dashboard = createDashboardLayer(font, this.currPlayer);
@@ -55,7 +55,7 @@ export default class Game {
         // tools.showBoundingBox(this.level);
     
         this.timer.update = (deltaTime) => {
-            this.controller.checkActivity(this.currPlayer.Play.avatar);
+            this.controller.checkActivity(this.currPlayer.PlayState.avatar);
             this.level.update(deltaTime);
             this.level.comp.draw(canvas.getContext("2d"), this.camera);
         };
