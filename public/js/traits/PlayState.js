@@ -14,23 +14,25 @@ export default class PlayState extends Trait {
         this.world = '1-1';
     }
     update(entity, deltaTime, level) {
-        if (!level.entities.has(this.avatar) && this.lives > 0) {
-            --this.lives;
-            this.avatar.Killable.revive();
-            this.time = 400;
-            this.camera.position.x = 0;
-            this.avatar.position.set(this.checkpoint.x, this.checkpoint.y);
-            level.entities.add(this.avatar);
-        } else if (this.lives === 0) {
-            this.time = 0;
-        } else {
-            if (this.time <= 0) {
+        if (level.entities.has(this.avatar)) {
+            if (this.time > 0) {
+                this.time -= deltaTime * 3;
+                this.followAvatar(this.avatar);
+            } else {
                 this.time = 0;
                 this.avatar.Killable.kill();
-            } else {
-                this.time -= deltaTime * 3;
             }
-            this.followAvatar(this.avatar);
+        } else {
+            if (this.lives > 0) {
+                this.avatar.Killable.revive();
+                this.avatar.position.set(this.checkpoint.x, this.checkpoint.y);
+                level.entities.add(this.avatar);
+                this.camera.position.x = 0;
+                this.time = 400;
+                --this.lives;
+            } else {
+                this.time = 0;
+            }
         }
     }
     followAvatar(avatar) {
