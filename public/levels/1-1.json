@@ -192,6 +192,18 @@
           ]
         },
         {
+          "pattern": "castle-1h",
+          "ranges": [
+            [203, 8]
+          ]
+        },
+        {
+          "pattern": "castle-2h",
+          "ranges": [
+            [202, 10]
+          ]
+        },
+        {
           "name": "chocolate",
           "type": "impassable",
           "ranges": [
@@ -305,6 +317,91 @@
           "type": "",
           "ranges" : [
             [4, 0]
+          ]
+        }
+      ]
+    },
+    "castle-1h": {
+      "tiles": [
+        {
+          "name": "castle-top-open",
+          "type": "",
+          "ranges" : [
+            [0, 0],
+            [1, 0],
+            [2, 0]
+          ]
+        },
+        {
+          "name": "castle-window-left",
+          "type": "",
+          "ranges" : [
+            [0, 1]
+          ]
+        },
+        {
+          "name": "castle-crumble",
+          "type": "",
+          "ranges" : [
+            [1, 1]
+          ]
+        },
+        {
+          "name": "castle-window-right",
+          "type": "",
+          "ranges" : [
+            [2, 1]
+          ]
+        }
+      ]
+    },
+    "castle-2h": {
+      "tiles": [
+        {
+          "name": "castle-top-open",
+          "type": "",
+          "ranges" : [
+            [0, 0],
+            [4, 0]
+          ]
+        },
+        {
+          "name": "castle-top-closed",
+          "type": "",
+          "ranges" : [
+            [1, 0],
+            [2, 0],
+            [3, 0]
+          ]
+        },
+        {
+          "name": "castle-wall",
+          "type": "",
+          "ranges" : [
+            [0, 1, 1, 2],
+            [3, 1, 1, 2],
+            [4, 1, 1, 2]
+          ]
+        },
+        {
+          "name": "castle-crumble",
+          "type": "",
+          "ranges" : [
+            [1, 1, 1, 2]
+          ]
+        },
+        {
+          "name": "castle-arch",
+          "type": "",
+          "ranges" : [
+            [2, 1]
+          ]
+        },
+        {
+          "name": "castle-void",
+          "type": "",
+          "ranges" : [
+            [2, 2]
           ]
         }
       ]
