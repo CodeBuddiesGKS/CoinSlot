@@ -27,14 +27,17 @@ export function loadSpriteSheet(name) {
             sheetSpec.tileW,
             sheetSpec.tileH
         );
-        if (sheetSpec.tiles) {
-            sheetSpec.tiles.forEach(tileSpec => {
-                sprites.defineTile(tileSpec.name, ...tileSpec.index);
-            });
-        }
         if (sheetSpec.frames) {
             sheetSpec.frames.forEach(frameSpec => {
                 sprites.define(frameSpec.name, ...frameSpec.rect)
+            });
+        } else if (sheetSpec.items) {
+            sheetSpec.items.forEach(itemSpec => {
+                sprites.define(itemSpec.name, ...itemSpec.rect)
+            });
+        } else if (sheetSpec.tiles) {
+            sheetSpec.tiles.forEach(tileSpec => {
+                sprites.defineTile(tileSpec.name, ...tileSpec.index);
             });
         }
         if (sheetSpec.animations) {

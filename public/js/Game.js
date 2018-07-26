@@ -27,7 +27,7 @@ export default class Game {
             loadFont()
         ]);
 
-        const mario = entityFactory.mario();
+        const mario = entityFactory.avatar();
         this.players.push(new Entity());
         this.players[0].addTrait(new PlayState(mario, this.camera));
         this.players[0].PlayState.checkpoint.set(32, 160);
@@ -35,7 +35,8 @@ export default class Game {
         this.keyboard.bindControls(this.currPlayer.PlayState.avatar);
 
         if (isTwoPlayers) {
-            const luigi = entityFactory.luigi();
+            const luigi = entityFactory.avatar();
+            luigi.Shift.color = 'wyg';
             this.players.push(new Entity());
             this.players[1].addTrait(new PlayState(luigi, this.camera));
             this.players[1].PlayState.checkpoint.set(32, 160);
@@ -49,10 +50,10 @@ export default class Game {
         this.level.entities.add(this.players[0]);
     
         //// Tools
-        tools.enableMouseControl(canvas, this.camera, this.level, this.currPlayer.PlayState.avatar);
+        // tools.enableMouseControl(canvas, this.camera, this.level, this.currPlayer.PlayState.avatar);
         // tools.showCameraBox(this.level, this.camera);
         // tools.showTileCollision(this.level);
-        // tools.showBoundingBox(this.level);
+        tools.showBoundingBox(this.level);
     
         this.timer.update = (deltaTime) => {
             this.controller.checkActivity(this.currPlayer.PlayState.avatar);

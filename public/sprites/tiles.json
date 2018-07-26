@@ -1,0 +1,313 @@
+{
+  "imageURL": "img/tiles.png",
+  "tileW": 16,
+  "tileH": 16,
+  "tiles": [
+    {
+      "name": "ow-brick",
+      "index": [1, 0]
+    },
+    {
+      "name": "uw-brick",
+      "index": [1, 2]
+    },
+    {
+      "name": "ow-bush-left",
+      "index": [11, 9]
+    },
+    {
+      "name": "uw-bush-left",
+      "index": [11, 9]
+    },
+    {
+      "name": "ow-bush-middle",
+      "index": [12, 9]
+    },
+    {
+      "name": "uw-bush-middle",
+      "index": [12, 9]
+    },
+    {
+      "name": "ow-bush-right",
+      "index": [13, 9]
+    },
+    {
+      "name": "uw-bush-right",
+      "index": [13, 9]
+    },
+    {
+      "name": "ow-castle-top-open",
+      "index": [11, 0]
+    },
+    {
+      "name": "uw-castle-top-open",
+      "index": [11, 0]
+    },
+    {
+      "name": "ow-castle-top-closed",
+      "index": [11, 1]
+    },
+    {
+      "name": "uw-castle-top-closed",
+      "index": [11, 1]
+    },
+    {
+      "name": "ow-castle-window-left",
+      "index": [12, 0]
+    },
+    {
+      "name": "uw-castle-window-left",
+      "index": [12, 0]
+    },
+    {
+      "name": "ow-castle-window-right",
+      "index": [14, 0]
+    },
+    {
+      "name": "uw-castle-window-right",
+      "index": [14, 0]
+    },
+    {
+      "name": "ow-castle-wall",
+      "index": [2, 0]
+    },
+    {
+      "name": "uw-castle-wall",
+      "index": [2, 0]
+    },
+    {
+      "name": "ow-castle-arch",
+      "index": [12, 1]
+    },
+    {
+      "name": "uw-castle-arch",
+      "index": [12, 1]
+    },
+    {
+      "name": "ow-castle-crumble",
+      "index": [13, 0]
+    },
+    {
+      "name": "uw-castle-crumble",
+      "index": [13, 0]
+    },
+    {
+      "name": "ow-castle-void",
+      "index": [13, 1]
+    },
+    {
+      "name": "uw-castle-void",
+      "index": [13, 1]
+    },
+    {
+      "name": "ow-chocolate",
+      "index": [0, 1]
+    },
+    {
+      "name": "uw-chocolate",
+      "index": [0, 3]
+    },
+    {
+      "name": "ow-cloud-1-1",
+      "index": [0, 20]
+    },
+    {
+      "name": "uw-cloud-1-1",
+      "index": [0, 26]
+    },
+    {
+      "name": "ow-cloud-1-2",
+      "index": [0, 21]
+    },
+    {
+      "name": "uw-cloud-1-2",
+      "index": [0, 27]
+    },
+    {
+      "name": "ow-cloud-2-1",
+      "index": [1, 20]
+    },
+    {
+      "name": "uw-cloud-2-1",
+      "index": [1, 26]
+    },
+    {
+      "name": "ow-cloud-2-2",
+      "index": [1, 21]
+    },
+    {
+      "name": "uw-cloud-2-2",
+      "index": [1, 27]
+    },
+    {
+      "name": "ow-cloud-3-1",
+      "index": [2, 20]
+    },
+    {
+      "name": "uw-cloud-3-1",
+      "index": [2, 26]
+    },
+    {
+      "name": "ow-cloud-3-2",
+      "index": [2, 21]
+    },
+    {
+      "name": "uw-cloud-3-2",
+      "index": [2, 27]
+    },
+    {
+      "name": "ow-flag-pole-top",
+      "index": [16, 8]
+    },
+    {
+      "name": "uw-flag-pole-top",
+      "index": [16, 8]
+    },
+    {
+      "name": "ow-flag-pole-body",
+      "index": [16, 9]
+    },
+    {
+      "name": "uw-flag-pole-body",
+      "index": [16, 9]
+    },
+    {
+      "name": "ow-ground",
+      "index": [0, 0]
+    },
+    {
+      "name": "uw-ground",
+      "index": [0, 2]
+    },
+    {
+      "name": "ow-hill-left",
+      "index": [8, 8]
+    },
+    {
+      "name": "uw-hill-left",
+      "index": [8, 8]
+    },
+    {
+      "name": "ow-hill-top",
+      "index": [9, 8]
+    },
+    {
+      "name": "uw-hill-top",
+      "index": [9, 8]
+    },
+    {
+      "name": "ow-hill-right",
+      "index": [10, 8]
+    },
+    {
+      "name": "uw-hill-right",
+      "index": [10, 8]
+    },
+    {
+      "name": "ow-hill-middle-spot",
+      "index": [8, 9]
+    },
+    {
+      "name": "uw-hill-middle-spot",
+      "index": [8, 9]
+    },
+    {
+      "name": "ow-hill-middle",
+      "index": [9, 9]
+    },
+    {
+      "name": "uw-hill-middle",
+      "index": [9, 9]
+    },
+    {
+      "name": "ow-pipe-vert-cap-left",
+      "index": [0, 8]
+    },
+    {
+      "name": "uw-pipe-vert-cap-left",
+      "index": [0, 18]
+    },
+    {
+      "name": "ow-pipe-vert-cap-right",
+      "index": [1, 8]
+    },
+    {
+      "name": "uw-pipe-vert-cap-right",
+      "index": [1, 18]
+    },
+    {
+      "name": "ow-pipe-vert-section-left",
+      "index": [0, 9]
+    },
+    {
+      "name": "uw-pipe-vert-section-left",
+      "index": [0, 19]
+    },
+    {
+      "name": "ow-pipe-vert-section-right",
+      "index": [1, 9]
+    },
+    {
+      "name": "uw-pipe-vert-section-right",
+      "index": [1, 19]
+    },
+    {
+      "name": "ow-powerup-1",
+      "index": [24, 0]
+    },
+    {
+      "name": "uw-powerup-1",
+      "index": [24, 2]
+    },
+    {
+      "name": "ow-powerup-2",
+      "index": [25, 0]
+    },
+    {
+      "name": "uw-powerup-2",
+      "index": [25, 2]
+    },
+    {
+      "name": "ow-powerup-3",
+      "index": [26, 0]
+    },
+    {
+      "name": "uw-powerup-3",
+      "index": [26, 2]
+    },
+    {
+      "name": "ow-sky",
+      "index": [3, 23]
+    },
+    {
+      "name": "uw-sky",
+      "index": [13, 3]
+    }
+  ],
+  "animations": [
+    {
+      "name": "ow-powerup",
+      "frameLength": 0.1,
+      "frames": [
+        "ow-powerup-1",
+        "ow-powerup-1",
+        "ow-powerup-1",
+        "ow-powerup-2",
+        "ow-powerup-3",
+        "ow-powerup-2"
+      ]
+    },
+    {
+      "name": "uw-powerup",
+      "frameLength": 0.1,
+      "frames": [
+        "uw-powerup-1",
+        "uw-powerup-1",
+        "uw-powerup-1",
+        "uw-powerup-2",
+        "uw-powerup-3",
+        "uw-powerup-2"
+      ]
+    }
+  ]
+}

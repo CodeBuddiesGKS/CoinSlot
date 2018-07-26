@@ -10,8 +10,7 @@ export function loadEntityFactory() {
     }
 
     return Promise.all([
-        loadAvatar('mario').then(addFactory('mario')),
-        loadAvatar('luigi').then(addFactory('luigi')),
+        loadAvatar().then(addFactory('avatar')),
         loadGoomba().then(addFactory('goomba')),
         loadKoopa().then(addFactory('koopa'))
     ])

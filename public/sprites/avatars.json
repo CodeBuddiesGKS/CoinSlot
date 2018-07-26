@@ -1,0 +1,245 @@
+{
+  "imageURL": "img/avatars.png",
+  "key": {
+    "sm": "small",
+    "lg": "large", 
+    "ryg": "red/yellow/green",
+    "wyr": "white/yellow/red",
+    "wyg": "white/yellow/green",
+    "bwc": "black/white/coffee",
+    "gwy": "green/white/yellow",
+    "rwy": "red/white/yellow",
+    "twc": "teal/white/coffee",
+    "ttt": "teal/teal/teal",
+    "www": "white/white/white",
+    "wwy": "white/white/yellow",
+    "bww": "black/white/white"
+  },
+  "frames": [
+    {"name": "sm-ryg-run-3", "rect": [80, 32, 16, 16]},
+    {"name": "sm-ryg-run-2", "rect": [96, 32, 16, 16]},
+    {"name": "sm-ryg-run-1", "rect": [112, 32, 16, 16]},
+    {"name": "sm-ryg-break", "rect": [127, 32, 16, 16]},
+    {"name": "sm-ryg-jump", "rect": [144, 32, 16, 16]},
+    {"name": "sm-ryg-dead", "rect": [160, 32, 16, 16]},
+    {"name": "sm-ryg-idle", "rect": [176, 32, 16, 16]},
+    
+    {"name": "sm-wyr-run-3", "rect": [80, 80, 16, 16]},
+    {"name": "sm-wyr-run-2", "rect": [96, 80, 16, 16]},
+    {"name": "sm-wyr-run-1", "rect": [112, 80, 16, 16]},
+    {"name": "sm-wyr-break", "rect": [127, 80, 16, 16]},
+    {"name": "sm-wyr-jump", "rect": [144, 80, 16, 16]},
+    {"name": "sm-wyr-dead", "rect": [160, 80, 16, 16]},
+    {"name": "sm-wyr-idle", "rect": [176, 80, 16, 16]},
+    
+    {"name": "sm-wyg-run-3", "rect": [80, 128, 16, 16]},
+    {"name": "sm-wyg-run-2", "rect": [96, 128, 16, 16]},
+    {"name": "sm-wyg-run-1", "rect": [112, 128, 16, 16]},
+    {"name": "sm-wyg-break", "rect": [127, 128, 16, 16]},
+    {"name": "sm-wyg-jump", "rect": [144, 128, 16, 16]},
+    {"name": "sm-wyg-dead", "rect": [160, 128, 16, 16]},
+    {"name": "sm-wyg-idle", "rect": [176, 128, 16, 16]},
+    
+    {"name": "sm-bwc-run-3", "rect": [80, 176, 16, 16]},
+    {"name": "sm-bwc-run-2", "rect": [96, 176, 16, 16]},
+    {"name": "sm-bwc-run-1", "rect": [112, 176, 16, 16]},
+    {"name": "sm-bwc-break", "rect": [127, 176, 16, 16]},
+    {"name": "sm-bwc-jump", "rect": [144, 176, 16, 16]},
+    {"name": "sm-bwc-dead", "rect": [160, 176, 16, 16]},
+    {"name": "sm-bwc-idle", "rect": [176, 176, 16, 16]},
+    
+    {"name": "sm-gwy-run-3", "rect": [80, 224, 16, 16]},
+    {"name": "sm-gwy-run-2", "rect": [96, 224, 16, 16]},
+    {"name": "sm-gwy-run-1", "rect": [112, 224, 16, 16]},
+    {"name": "sm-gwy-break", "rect": [127, 224, 16, 16]},
+    {"name": "sm-gwy-jump", "rect": [144, 224, 16, 16]},
+    {"name": "sm-gwy-dead", "rect": [160, 224, 16, 16]},
+    {"name": "sm-gwy-idle", "rect": [176, 224, 16, 16]},
+    
+    {"name": "sm-rwy-run-3", "rect": [80, 272, 16, 16]},
+    {"name": "sm-rwy-run-2", "rect": [96, 272, 16, 16]},
+    {"name": "sm-rwy-run-1", "rect": [112, 272, 16, 16]},
+    {"name": "sm-rwy-break", "rect": [127, 272, 16, 16]},
+    {"name": "sm-rwy-jump", "rect": [144, 272, 16, 16]},
+    {"name": "sm-rwy-dead", "rect": [160, 272, 16, 16]},
+    {"name": "sm-rwy-idle", "rect": [176, 272, 16, 16]},
+    
+    {"name": "sm-twc-run-3", "rect": [80, 320, 16, 16]},
+    {"name": "sm-twc-run-2", "rect": [96, 320, 16, 16]},
+    {"name": "sm-twc-run-1", "rect": [112, 320, 16, 16]},
+    {"name": "sm-twc-break", "rect": [127, 320, 16, 16]},
+    {"name": "sm-twc-jump", "rect": [144, 320, 16, 16]},
+    {"name": "sm-twc-dead", "rect": [160, 320, 16, 16]},
+    {"name": "sm-twc-idle", "rect": [176, 320, 16, 16]},
+    
+    {"name": "sm-ttt-run-3", "rect": [80, 368, 16, 16]},
+    {"name": "sm-ttt-run-2", "rect": [96, 368, 16, 16]},
+    {"name": "sm-ttt-run-1", "rect": [112, 368, 16, 16]},
+    {"name": "sm-ttt-break", "rect": [127, 368, 16, 16]},
+    {"name": "sm-ttt-jump", "rect": [144, 368, 16, 16]},
+    {"name": "sm-ttt-dead", "rect": [160, 368, 16, 16]},
+    {"name": "sm-ttt-idle", "rect": [176, 368, 16, 16]},
+    
+    {"name": "sm-www-run-3", "rect": [80, 416, 16, 16]},
+    {"name": "sm-www-run-2", "rect": [96, 416, 16, 16]},
+    {"name": "sm-www-run-1", "rect": [112, 416, 16, 16]},
+    {"name": "sm-www-break", "rect": [127, 416, 16, 16]},
+    {"name": "sm-www-jump", "rect": [144, 416, 16, 16]},
+    {"name": "sm-www-dead", "rect": [160, 416, 16, 16]},
+    {"name": "sm-www-idle", "rect": [176, 416, 16, 16]},
+    
+    {"name": "sm-wwy-run-3", "rect": [80, 464, 16, 16]},
+    {"name": "sm-wwy-run-2", "rect": [96, 464, 16, 16]},
+    {"name": "sm-wwy-run-1", "rect": [112, 464, 16, 16]},
+    {"name": "sm-wwy-break", "rect": [127, 464, 16, 16]},
+    {"name": "sm-wwy-jump", "rect": [144, 464, 16, 16]},
+    {"name": "sm-wwy-dead", "rect": [160, 464, 16, 16]},
+    {"name": "sm-wwy-idle", "rect": [176, 464, 16, 16]},
+    
+    {"name": "sm-bww-run-3", "rect": [80, 512, 16, 16]},
+    {"name": "sm-bww-run-2", "rect": [96, 512, 16, 16]},
+    {"name": "sm-bww-run-1", "rect": [112, 512, 16, 16]},
+    {"name": "sm-bww-break", "rect": [127, 512, 16, 16]},
+    {"name": "sm-bww-jump", "rect": [144, 512, 16, 16]},
+    {"name": "sm-bww-dead", "rect": [160, 512, 16, 16]},
+    {"name": "sm-bww-idle", "rect": [176, 512, 16, 16]},
+
+
+    
+
+ 
+    {"name": "md-ryg-idle", "rect": [304, 8, 16, 24]},
+    {"name": "md-wyr-idle", "rect": [304, 56, 16, 24]},
+    {"name": "md-wyg-idle", "rect": [304, 104, 16, 24]},
+    {"name": "md-bwc-idle", "rect": [304, 152, 16, 24]},
+    {"name": "md-gwy-idle", "rect": [304, 200, 16, 24]},
+    {"name": "md-rwy-idle", "rect": [304, 248, 16, 24]},
+    {"name": "md-twc-idle", "rect": [304, 296, 16, 24]},
+    {"name": "md-ttt-idle", "rect": [304, 344, 16, 24]},
+    {"name": "md-www-idle", "rect": [304, 392, 16, 24]},
+    {"name": "md-wwy-idle", "rect": [304, 440, 16, 24]},
+    {"name": "md-bww-idle", "rect": [304, 488, 16, 24]},
+
+
+
+
+    
+    {"name": "lg-ryg-run-3", "rect": [80, 0, 16, 32]},
+    {"name": "lg-ryg-run-2", "rect": [96, 0, 16, 32]},
+    {"name": "lg-ryg-run-1", "rect": [112, 0, 16, 32]},
+    {"name": "lg-ryg-break", "rect": [128, 0, 16, 32]},
+    {"name": "lg-ryg-jump", "rect": [144, 0, 16, 32]},
+    {"name": "lg-ryg-crouch", "rect": [160, 0, 16, 32]},
+    {"name": "lg-ryg-idle", "rect": [176, 0, 16, 32]},
+    
+    {"name": "lg-wyr-run-3", "rect": [80, 48, 16, 32]},
+    {"name": "lg-wyr-run-2", "rect": [96, 48, 16, 32]},
+    {"name": "lg-wyr-run-1", "rect": [112, 48, 16, 32]},
+    {"name": "lg-wyr-break", "rect": [128, 48, 16, 32]},
+    {"name": "lg-wyr-jump", "rect": [144, 48, 16, 32]},
+    {"name": "lg-wyr-crouch", "rect": [160, 48, 16, 32]},
+    {"name": "lg-wyr-idle", "rect": [176, 48, 16, 32]},
+    
+    {"name": "lg-wyg-run-3", "rect": [80, 96, 16, 32]},
+    {"name": "lg-wyg-run-2", "rect": [96, 96, 16, 32]},
+    {"name": "lg-wyg-run-1", "rect": [112, 96, 16, 32]},
+    {"name": "lg-wyg-break", "rect": [128, 96, 16, 32]},
+    {"name": "lg-wyg-jump", "rect": [144, 96, 16, 32]},
+    {"name": "lg-wyg-crouch", "rect": [160, 96, 16, 32]},
+    {"name": "lg-wyg-idle", "rect": [176, 96, 16, 32]},
+    
+    {"name": "lg-bwc-run-3", "rect": [80, 144, 16, 32]},
+    {"name": "lg-bwc-run-2", "rect": [96, 144, 16, 32]},
+    {"name": "lg-bwc-run-1", "rect": [112, 144, 16, 32]},
+    {"name": "lg-bwc-break", "rect": [128, 144, 16, 32]},
+    {"name": "lg-bwc-jump", "rect": [144, 144, 16, 32]},
+    {"name": "lg-bwc-crouch", "rect": [160, 144, 16, 32]},
+    {"name": "lg-bwc-idle", "rect": [176, 144, 16, 32]},
+    
+    {"name": "lg-gwy-run-3", "rect": [80, 192, 16, 32]},
+    {"name": "lg-gwy-run-2", "rect": [96, 192, 16, 32]},
+    {"name": "lg-gwy-run-1", "rect": [112, 192, 16, 32]},
+    {"name": "lg-gwy-break", "rect": [128, 192, 16, 32]},
+    {"name": "lg-gwy-jump", "rect": [144, 192, 16, 32]},
+    {"name": "lg-gwy-crouch", "rect": [160, 192, 16, 32]},
+    {"name": "lg-gwy-idle", "rect": [176, 192, 16, 32]},
+    
+    {"name": "lg-rwy-run-3", "rect": [80, 240, 16, 32]},
+    {"name": "lg-rwy-run-2", "rect": [96, 240, 16, 32]},
+    {"name": "lg-rwy-run-1", "rect": [112, 240, 16, 32]},
+    {"name": "lg-rwy-break", "rect": [128, 240, 16, 32]},
+    {"name": "lg-rwy-jump", "rect": [144, 240, 16, 32]},
+    {"name": "lg-rwy-crouch", "rect": [160, 240, 16, 32]},
+    {"name": "lg-rwy-idle", "rect": [176, 240, 16, 32]},
+    
+    {"name": "lg-twc-run-3", "rect": [80, 288, 16, 32]},
+    {"name": "lg-twc-run-2", "rect": [96, 288, 16, 32]},
+    {"name": "lg-twc-run-1", "rect": [112, 288, 16, 32]},
+    {"name": "lg-twc-break", "rect": [128, 288, 16, 32]},
+    {"name": "lg-twc-jump", "rect": [144, 288, 16, 32]},
+    {"name": "lg-twc-crouch", "rect": [160, 288, 16, 32]},
+    {"name": "lg-twc-idle", "rect": [176, 288, 16, 32]},
+    
+    {"name": "lg-ttt-run-3", "rect": [80, 336, 16, 32]},
+    {"name": "lg-ttt-run-2", "rect": [96, 336, 16, 32]},
+    {"name": "lg-ttt-run-1", "rect": [112, 336, 16, 32]},
+    {"name": "lg-ttt-break", "rect": [128, 336, 16, 32]},
+    {"name": "lg-ttt-jump", "rect": [144, 336, 16, 32]},
+    {"name": "lg-ttt-crouch", "rect": [160, 336, 16, 32]},
+    {"name": "lg-ttt-idle", "rect": [176, 336, 16, 32]},
+    
+    {"name": "lg-www-run-3", "rect": [80, 384, 16, 32]},
+    {"name": "lg-www-run-2", "rect": [96, 384, 16, 32]},
+    {"name": "lg-www-run-1", "rect": [112, 384, 16, 32]},
+    {"name": "lg-www-break", "rect": [128, 384, 16, 32]},
+    {"name": "lg-www-jump", "rect": [144, 384, 16, 32]},
+    {"name": "lg-www-crouch", "rect": [160, 384, 16, 32]},
+    {"name": "lg-www-idle", "rect": [176, 384, 16, 32]},
+    
+    {"name": "lg-wwy-run-3", "rect": [80, 432, 16, 32]},
+    {"name": "lg-wwy-run-2", "rect": [96, 432, 16, 32]},
+    {"name": "lg-wwy-run-1", "rect": [112, 432, 16, 32]},
+    {"name": "lg-wwy-break", "rect": [128, 432, 16, 32]},
+    {"name": "lg-wwy-jump", "rect": [144, 432, 16, 32]},
+    {"name": "lg-wwy-crouch", "rect": [160, 432, 16, 32]},
+    {"name": "lg-wwy-idle", "rect": [176, 432, 16, 32]},
+    
+    {"name": "lg-bww-run-3", "rect": [80, 480, 16, 32]},
+    {"name": "lg-bww-run-2", "rect": [96, 480, 16, 32]},
+    {"name": "lg-bww-run-1", "rect": [112, 480, 16, 32]},
+    {"name": "lg-bww-break", "rect": [128, 480, 16, 32]},
+    {"name": "lg-bww-jump", "rect": [144, 480, 16, 32]},
+    {"name": "lg-bww-crouch", "rect": [160, 480, 16, 32]},
+    {"name": "lg-bww-idle", "rect": [176, 480, 16, 32]}
+  ],
+  "animations": [
+    {
+      "name": "run",
+      "frameLength": 8,
+      "frames": [
+        "run-1", "run-2", "run-3"
+      ]
+    },
+    {
+      "name": "grow",
+      "frameLength": 8,
+      "frames": [
+        "sm", "md",
+        "sm", "md",
+        "sm", "md", "lg",
+        "sm", "md", "lg"
+      ]
+    },
+    {
+      "name": "toFire",
+      "frameLength": 8,
+      "frames": [
+        "wyr", "gwy", "rwy", "bwc",
+        "wyr", "gwy", "rwy", "bwc",
+        "wyr", "gwy", "rwy", "bwc",
+        "wyr", "gwy", "rwy", "bwc",
+        "wyr"
+      ]
+    }
+  ]
+}

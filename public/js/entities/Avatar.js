@@ -4,14 +4,15 @@ import Go from '../traits/Go.js';
 import Jump from '../traits/Jump.js';
 import Killable from '../traits/Killable.js';
 import Physics from '../traits/Physics.js';
+import Shift from '../traits/Shift.js';
 import Solid from '../traits/Solid.js';
 import Stomp from '../traits/Stomp.js';
 
 const FAST_DRAG = 1/5000;
 const SLOW_DRAG = 1/1500;
 
-export function loadAvatar(name) {
-    return loadSpriteSheet(name).then(avatarSprite => {
+export function loadAvatar() {
+    return loadSpriteSheet('avatars').then(avatarSprite => {
         return createAvatarFactory(avatarSprite);
     });
 }
@@ -19,21 +20,28 @@ export function loadAvatar(name) {
 function createAvatarFactory(avatarSprite) {
     function draw(context) {
         const flip = this.Go.heading === -1;
-        const frame = getMovementFrame(this);
+        const frame = getFrame(this);
         avatarSprite.draw(frame, context, 0, 0, flip);
     }
-    function getMovementFrame(avatar) {
+    function getFrame(avatar) {
+        // let color = avatarSprite.animations.get('toFire')(avatar.Go.distance);
+        let color = avatar.Shift.color;
+        let frame = avatar.Shift.size + '-' + color + '-';
+
         if (avatar.Jump.freeFall) {
-            return 'jump';
+            frame += 'jump';
         } else if (avatar.Go.distance > 0) {
             if ((avatar.velocity.x > 0 && avatar.Go.dir < 0)
                 || (avatar.velocity.x < 0 && avatar.Go.dir > 0)) {
-                return 'break';
+                frame += 'break';
+            } else {
+                frame += avatarSprite.animations.get('run')(avatar.Go.distance);
             }
-            return avatarSprite.animations.get('run')(avatar.Go.distance);
         } else {
-            return 'idle';
+            frame += 'idle';
         }
+
+        return frame;
     }
     function setTurboDrag(turboOn) {
         this.Go.dragCoefficient = turboOn ? FAST_DRAG : SLOW_DRAG;
@@ -48,8 +56,12 @@ function createAvatarFactory(avatarSprite) {
         avatar.addTrait(new Jump());
         avatar.addTrait(new Killable());
         avatar.addTrait(new Physics());
+        avatar.addTrait(new Shift());
         avatar.addTrait(new Solid());
         avatar.addTrait(new Stomp());
+
+        avatar.size.y = 32;
+        avatar.Shift.size = 'lg'
 
         avatar.turbo = setTurboDrag;
         avatar.turbo(false);

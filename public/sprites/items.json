@@ -1,0 +1,41 @@
+{
+  "imageURL": "img/items.png",
+  "items": [
+    {
+      "name": "ow-brick-donut",
+      "rect": [64, 0, 16, 16]
+    },
+    {
+      "name": "ow-brick-donuthole",
+      "rect": [64, 16, 16, 16]
+    },
+    {
+      "name": "fireball-1",
+      "rect": [96, 144, 8, 8]
+    },
+    {
+      "name": "fireball-2",
+      "rect": [104, 144, 8, 8]
+    },
+    {
+      "name": "fireball-3",
+      "rect": [96, 152, 8, 8]
+    },
+    {
+      "name": "fireball-4",
+      "rect": [104, 152, 8, 8]
+    }
+  ],
+  "animations": [
+    {
+      "name": "fireball",
+      "frameLength": 8,
+      "frames": [
+        "fireball-4",
+        "fireball-1",
+        "fireball-2",
+        "fireball-3"
+      ]
+    }
+  ]
+}

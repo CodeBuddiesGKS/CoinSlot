@@ -82,13 +82,13 @@ export function createLevelFactory(entityFactory) {
         return loadJSON(`../levels/${name}.json`)
             .then(levelSpec => Promise.all([
                 levelSpec,
-                loadSpriteSheet(levelSpec.spriteSheet)
+                loadSpriteSheet('tiles')
             ]))
-            .then(([levelSpec, backgroundSprites]) => {
+            .then(([levelSpec, tileSprites]) => {
                 const level = new Level();
 
                 setupCollision(levelSpec, level);
-                setupBackgroundLayers(levelSpec, level, backgroundSprites);
+                setupBackgroundLayers(levelSpec, level, tileSprites);
                 setupEntityLayer(levelSpec, level, entityFactory);
 
                 return level;
@@ -96,10 +96,10 @@ export function createLevelFactory(entityFactory) {
     }
 }
 
-function setupBackgroundLayers(levelSpec, level, backgroundSprites) {
+function setupBackgroundLayers(levelSpec, level, tileSprites) {
     levelSpec.layers.forEach(layer => {
         const backgroundGrid = createBackgroundGrid(layer.tiles, levelSpec.patterns);
-        const backgroundLayer = createBackgroundLayer(level, backgroundGrid, backgroundSprites);
+        const backgroundLayer = createBackgroundLayer(level, backgroundGrid, tileSprites);
         level.comp.layers.push(backgroundLayer);
     });
 }
