@@ -4,9 +4,10 @@ import Go from '../traits/Go.js';
 import Jump from '../traits/Jump.js';
 import Killable from '../traits/Killable.js';
 import Physics from '../traits/Physics.js';
-import Shift from '../traits/Shift.js';
+import Shift, {Size, Color} from '../traits/Shift.js';
 import Solid from '../traits/Solid.js';
 import Stomp from '../traits/Stomp.js';
+import Uppercut from '../traits/Uppercut.js';
 
 const FAST_DRAG = 1/5000;
 const SLOW_DRAG = 1/1500;
@@ -25,8 +26,9 @@ function createAvatarFactory(avatarSprite) {
     }
     function getFrame(avatar) {
         // let color = avatarSprite.animations.get('toFire')(avatar.Go.distance);
-        let color = avatar.Shift.color;
-        let frame = avatar.Shift.size + '-' + color + '-';
+        let color = Symbol.keyFor(avatar.Shift.color);
+        let size = Symbol.keyFor(avatar.Shift.size);
+        let frame = size + '-' + color + '-';
 
         if (avatar.Jump.freeFall) {
             frame += 'jump';
@@ -59,9 +61,7 @@ function createAvatarFactory(avatarSprite) {
         avatar.addTrait(new Shift());
         avatar.addTrait(new Solid());
         avatar.addTrait(new Stomp());
-
-        avatar.size.y = 32;
-        avatar.Shift.size = 'lg'
+        avatar.addTrait(new Uppercut());
 
         avatar.turbo = setTurboDrag;
         avatar.turbo(false);

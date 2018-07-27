@@ -52,7 +52,7 @@
       "tiles": [
         {
           "name": "ow-brick",
-          "type": "impassable",
+          "type": "brick",
           "ranges": [
             [20, 5, 9],
             [77, 3, 9],
@@ -183,7 +183,7 @@
         },
         {
           "name": "ow-powerup",
-          "type": "impassable",
+          "type": "powerup",
           "ranges": [
             [16, 9],
             [21, 9],

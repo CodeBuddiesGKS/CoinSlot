@@ -1,20 +1,5 @@
 {
   "imageURL": "img/avatars.png",
-  "key": {
-    "sm": "small",
-    "lg": "large", 
-    "ryg": "red/yellow/green",
-    "wyr": "white/yellow/red",
-    "wyg": "white/yellow/green",
-    "bwc": "black/white/coffee",
-    "gwy": "green/white/yellow",
-    "rwy": "red/white/yellow",
-    "twc": "teal/white/coffee",
-    "ttt": "teal/teal/teal",
-    "www": "white/white/white",
-    "wwy": "white/white/yellow",
-    "bww": "black/white/white"
-  },
   "frames": [
     {"name": "sm-ryg-run-3", "rect": [80, 32, 16, 16]},
     {"name": "sm-ryg-run-2", "rect": [96, 32, 16, 16]},

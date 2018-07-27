@@ -9,13 +9,17 @@ export default class TileResolver {
         const r = l + this.tileSize;
         const t = indexY * this.tileSize;
         const b = t + this.tileSize;
+        const cx = l + Math.floor(this.tileSize/2);
+        const cy = t + Math.floor(this.tileSize/2);
         if (tile) {
             return {
                 tile,
                 l,
                 r,
                 t,
-                b
+                b,
+                cx,
+                cy
             };
         }
     }

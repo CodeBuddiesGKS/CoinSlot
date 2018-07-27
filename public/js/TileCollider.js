@@ -20,7 +20,7 @@ export default class TileCollider {
             entity.bounds.bottom
         );
         matches.forEach(match => {
-            if (match.tile.type !== 'impassable') {
+            if (!isObstructable(match)) {
                 return;
             }
             if (entity.velocity.x > 0 && x > match.l) {
@@ -44,15 +44,50 @@ export default class TileCollider {
             entity.bounds.right,
             y, y
         );
-        matches.forEach(match => {
-            if (match.tile.type !== 'impassable') {
-                return;
-            }
-            if (entity.velocity.y > 0 && y > match.t) {
-                entity.obstruct(Sides.BOTTOM, match);
-            } else if (entity.velocity.y < 0 && y < match.b) {
-                entity.obstruct(Sides.TOP, match);
+        callObstructForY(entity, matches, y);
+    }
+}
+
+function callObstructForY(entity, matches, y) {
+    if (matches.length === 1) {
+        let match = matches[0];
+        if (!isObstructable(match)) {
+            return;
+        }
+        if (entity.velocity.y > 0 && y > match.t) {
+            entity.obstruct(Sides.BOTTOM, match);
+        } else if (entity.velocity.y < 0 && y < match.b) {
+            entity.obstruct(Sides.TOP, match);
+        }
+        
+    } else if (matches.length > 1) {
+        let closestObstructableTile = undefined;
+        matches.forEach(m => {
+            if (isObstructable(m)) {
+                let deltaX = +Math.abs(m.cx - entity.bounds.centerX).toFixed(1);
+                if (!closestObstructableTile) {
+                    closestObstructableTile = m;
+                    closestObstructableTile.deltaX = deltaX;
+                } else if (deltaX < closestObstructableTile.deltaX) {
+                    closestObstructableTile = m;
+                    closestObstructableTile.deltaX = deltaX;
+                }
             }
         });
+        if (!closestObstructableTile) {
+            return;
+        } else {
+            if (entity.velocity.y > 0 && y > closestObstructableTile.t) {
+                entity.obstruct(Sides.BOTTOM, closestObstructableTile);
+            } else if (entity.velocity.y < 0 && y < closestObstructableTile.b) {
+                entity.obstruct(Sides.TOP, closestObstructableTile);
+            }
+        }
     }
+}
+
+function isObstructable(match) {
+    return match.tile.type === 'impassable'
+        || match.tile.type === 'brick'
+        || match.tile.type === 'powerup';
 }

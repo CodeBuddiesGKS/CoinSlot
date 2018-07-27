@@ -57,13 +57,13 @@ export function enableMouseControl(canvas, camera, level, entity) {
 }
 
 export function showCameraBox(level, camera) {
-    level.comp.layers.push(createCameraBoxLayer(camera));
+    level.comp.layers.set('cameraBoxLayer', createCameraBoxLayer(camera));
 }
 
 export function showTileCollision(level) {
-    level.comp.layers.push(createTileCollisionLayer(level));
+    level.comp.layers.set('tileCollisionLayer', createTileCollisionLayer(level));
 }
 
 export function showBoundingBox(level) {
-    level.comp.layers.push(createBoundingBoxLayer(level));
+    level.comp.layers.set('boundingBoxLayer', createBoundingBoxLayer(level));
 }

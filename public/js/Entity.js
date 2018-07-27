@@ -29,9 +29,9 @@ export default class Entity {
         });
     }
     draw() {}
-    finalize() {
+    finalize(deltaTime, level) {
         this.traits.forEach(trait => {
-            trait.finalize();
+            trait.finalize(this, deltaTime, level);
         });
     }
     obstruct(side, match) {
@@ -54,8 +54,8 @@ export class Trait {
         this.tasks = [];
     }
     collides(us, them) {}
-    finalize() {
-        this.tasks.forEach(task => task());
+    finalize(entity, deltaTime, level) {
+        this.tasks.forEach(task => task(entity, deltaTime, level));
         this.tasks.length = 0;
     }
     obstruct(entity, side, match) {}

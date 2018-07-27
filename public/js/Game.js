@@ -1,5 +1,4 @@
 import Camera from "./Camera.js";
-import Compositor from './Compositor.js';
 import Entity from './Entity.js';
 import Gamepad from './Gamepad.js';
 import Keyboard from './Keyboard.js';
@@ -42,18 +41,18 @@ export default class Game {
             this.players[1].PlayState.checkpoint.set(32, 160);
         }
 
-        const dashboard = createDashboardLayer(font, this.currPlayer);
+        const dashboardLayer = createDashboardLayer(font, this.currPlayer);
     
         const levelFactory = createLevelFactory(entityFactory);
         this.level = await levelFactory('1-1');
-        this.level.comp.layers.push(dashboard);
+        this.level.comp.layers.set('dashboardLayer', dashboardLayer);
         this.level.entities.add(this.players[0]);
     
         //// Tools
         // tools.enableMouseControl(canvas, this.camera, this.level, this.currPlayer.PlayState.avatar);
         // tools.showCameraBox(this.level, this.camera);
         // tools.showTileCollision(this.level);
-        tools.showBoundingBox(this.level);
+        // tools.showBoundingBox(this.level);
     
         this.timer.update = (deltaTime) => {
             this.controller.checkActivity(this.currPlayer.PlayState.avatar);

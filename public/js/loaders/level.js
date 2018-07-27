@@ -4,21 +4,21 @@ import {Matrix} from '../math.js';
 import {createBackgroundLayer} from '../layers/background.js';
 import {createSpriteLayer} from '../layers/sprite.js';
 
-function createBackgroundGrid(tiles, patterns) {
+function createCollisionMatrix(tiles, patterns) {
     const grid = new Matrix();
 
     for (const {tile, x, y} of expandTiles(tiles, patterns)) {
-        grid.set(x, y, {name: tile.name});
+        grid.set(x, y, {type: tile.type});
     }
 
     return grid;
 }
 
-function createCollisionGrid(tiles, patterns) {
+function createTileMatrix(tiles, patterns) {
     const grid = new Matrix();
 
     for (const {tile, x, y} of expandTiles(tiles, patterns)) {
-        grid.set(x, y, {type: tile.type});
+        grid.set(x, y, {name: tile.name});
     }
 
     return grid;
@@ -97,10 +97,10 @@ export function createLevelFactory(entityFactory) {
 }
 
 function setupBackgroundLayers(levelSpec, level, tileSprites) {
-    levelSpec.layers.forEach(layer => {
-        const backgroundGrid = createBackgroundGrid(layer.tiles, levelSpec.patterns);
-        const backgroundLayer = createBackgroundLayer(level, backgroundGrid, tileSprites);
-        level.comp.layers.push(backgroundLayer);
+    levelSpec.layers.forEach((layer, index) => {
+        const tileMatrix = createTileMatrix(layer.tiles, levelSpec.patterns);
+        const backgroundLayer = createBackgroundLayer(level, tileMatrix, tileSprites);
+        level.comp.layers.set('backgroundLayer' + (index+1), backgroundLayer);
     });
 }
 
@@ -108,8 +108,8 @@ function setupCollision(levelSpec, level) {
     const mergedTiles = levelSpec.layers.reduce((mergedTiles, layerSpec) => {
         return mergedTiles.concat(layerSpec.tiles);
     }, []);
-    const collisionGrid = createCollisionGrid(mergedTiles, levelSpec.patterns);
-    level.setCollisionGrid(collisionGrid);
+    const collisionMatrix = createCollisionMatrix(mergedTiles, levelSpec.patterns);
+    level.setCollisionGrid(collisionMatrix);
 }
 
 function setupEntityLayer(levelSpec, level, entityFactory) {
@@ -119,5 +119,5 @@ function setupEntityLayer(levelSpec, level, entityFactory) {
         level.entities.add(entity);
     });
     const spriteLayer = createSpriteLayer(level.entities);
-    level.comp.layers.push(spriteLayer);
+    level.comp.layers.set('spriteLayer', spriteLayer);
 }

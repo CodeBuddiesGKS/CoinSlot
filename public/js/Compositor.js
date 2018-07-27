@@ -1,6 +1,6 @@
 export default class Compositor {
     constructor() {
-        this.layers = [];
+        this.layers = new Map();
     }
     draw(context, camera) {
         this.layers.forEach(layer => {
