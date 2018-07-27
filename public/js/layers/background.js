@@ -16,20 +16,12 @@ export function createBackgroundLayer(level, tiles, sprites) {
             if (col) {
                 col.forEach((tile, y) => {
                     if (sprites.animations.has(tile.name)) {
-                        sprites.drawAnimation(
-                            tile.name,
-                            context,
-                            x-startIndex,
-                            y,
-                            level.totalTime
-                        );
+                        sprites.drawAnimation(tile.name, context, x-startIndex, y, level.totalTime);
                     } else {
-                        sprites.drawTile(
-                            tile.name,
-                            context,
-                            x - startIndex,
-                            y
-                        );
+                        if (x === 20 && y === 9) {
+                            y -= 0.25
+                        }
+                        sprites.drawTile(tile.name, context, x - startIndex, y);
                     }
                 });
             }
