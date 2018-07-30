@@ -1,24 +1,15 @@
 import Level from '../Level.js';
 import {loadJSON, loadSpriteSheet} from './loaders.js';
 import {Matrix} from '../math.js';
+import {createCollisionLayer} from '../layers/collision.js';
 import {createBackgroundLayer} from '../layers/background.js';
 import {createSpriteLayer} from '../layers/sprite.js';
 
-function createCollisionMatrix(tiles, patterns) {
+function createMatrix(tiles, patterns) {
     const grid = new Matrix();
 
     for (const {tile, x, y} of expandTiles(tiles, patterns)) {
-        grid.set(x, y, {type: tile.type});
-    }
-
-    return grid;
-}
-
-function createTileMatrix(tiles, patterns) {
-    const grid = new Matrix();
-
-    for (const {tile, x, y} of expandTiles(tiles, patterns)) {
-        grid.set(x, y, {name: tile.name});
+        grid.set(x, y, {name: tile.name, type: tile.type});
     }
 
     return grid;
@@ -87,29 +78,12 @@ export function createLevelFactory(entityFactory) {
             .then(([levelSpec, tileSprites]) => {
                 const level = new Level();
 
-                setupCollision(levelSpec, level);
-                setupBackgroundLayers(levelSpec, level, tileSprites);
+                setupTileLayers(levelSpec, level, tileSprites);
                 setupEntityLayer(levelSpec, level, entityFactory);
 
                 return level;
             });
     }
-}
-
-function setupBackgroundLayers(levelSpec, level, tileSprites) {
-    levelSpec.layers.forEach((layer, index) => {
-        const tileMatrix = createTileMatrix(layer.tiles, levelSpec.patterns);
-        const backgroundLayer = createBackgroundLayer(level, tileMatrix, tileSprites);
-        level.comp.layers.set('backgroundLayer' + (index+1), backgroundLayer);
-    });
-}
-
-function setupCollision(levelSpec, level) {
-    const mergedTiles = levelSpec.layers.reduce((mergedTiles, layerSpec) => {
-        return mergedTiles.concat(layerSpec.tiles);
-    }, []);
-    const collisionMatrix = createCollisionMatrix(mergedTiles, levelSpec.patterns);
-    level.setCollisionGrid(collisionMatrix);
 }
 
 function setupEntityLayer(levelSpec, level, entityFactory) {
@@ -120,4 +94,19 @@ function setupEntityLayer(levelSpec, level, entityFactory) {
     });
     const spriteLayer = createSpriteLayer(level.entities);
     level.comp.layers.set('spriteLayer', spriteLayer);
+}
+
+function setupTileLayers(levelSpec, level, tileSprites) {
+    const skyMatrix = createMatrix(levelSpec.layers[0].tiles, levelSpec.patterns);
+    const skyLayer = createBackgroundLayer(level, skyMatrix, tileSprites);
+    level.comp.layers.set('skyLayer', skyLayer);
+
+    const sceneryMatrix = createMatrix(levelSpec.layers[1].tiles, levelSpec.patterns);
+    const sceneryLayer = createBackgroundLayer(level, sceneryMatrix, tileSprites);
+    level.comp.layers.set('sceneryLayer', sceneryLayer);
+    
+    const collisionMatrix = createMatrix(levelSpec.layers[2].tiles, levelSpec.patterns);
+    level.setCollisionGrid(collisionMatrix);
+    const collisionLayer = createCollisionLayer(level, tileSprites);
+    level.comp.layers.set('collisionLayer', collisionLayer);
 }

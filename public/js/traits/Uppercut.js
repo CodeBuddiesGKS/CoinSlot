@@ -9,9 +9,12 @@ export default class Uppercut extends Trait {
     bounceTile(tile) {
         this.tileToBounce = tile;
         this.queue((entity, deltaTime, level) => {
-            const posX = this.tileToBounce.l / 16;
-            const posy = this.tileToBounce.t / 16;
-            console.log('bounce tile', entity, deltaTime, level, this.tileToBounce);
+            const x = this.tileToBounce.l / 16;
+            const y = this.tileToBounce.t / 16;
+            const tile = level.tileCollider.tiles.matrix.grid[x][y];
+            tile.bounceDuration = 15/60;
+            // tile.name = 'ow-sky';
+            // tile.type = undefined;
         });
     }
     obstruct(entity, side, match) {
@@ -28,6 +31,7 @@ export default class Uppercut extends Trait {
                 }
             } else if (match.tile.type === "powerup") {
                 console.log('bounce & pop powerup');
+                this.bounceTile(match);
             }
         }
     }

@@ -57,7 +57,7 @@ export default class Game {
         this.timer.update = (deltaTime) => {
             this.controller.checkActivity(this.currPlayer.PlayState.avatar);
             this.level.update(deltaTime);
-            this.level.comp.draw(canvas.getContext("2d"), this.camera);
+            this.level.comp.draw(canvas.getContext("2d"), this.camera, deltaTime);
         };
     }
     start() {
