@@ -1,20 +1,40 @@
 import {Sides, Trait} from '../Entity.js';
 import {Size, Color} from '../traits/Shift.js';
 
+const BOUNCE_DURATION = 15/60;
+
 export default class Uppercut extends Trait {
     constructor() {
         super('Uppercut');
-        this.tileToBounce;
     }
-    bounceTile(tile) {
-        this.tileToBounce = tile;
+    handleBrick(tile, entity) {
+        this.brick = tile;
+        this.entity = entity;
         this.queue((entity, deltaTime, level) => {
-            const x = this.tileToBounce.l / 16;
-            const y = this.tileToBounce.t / 16;
+            const x = this.brick.l / 16;
+            const y = this.brick.t / 16;
             const tile = level.tileCollider.tiles.matrix.grid[x][y];
-            tile.bounceDuration = 15/60;
-            // tile.name = 'ow-sky';
-            // tile.type = undefined;
+            
+            if (this.entity.Shift.size === Size.LG) {
+                console.log('break brick');
+                // tile.name = 'ow-sky';
+                // tile.type = undefined;
+            } else {
+                console.log('bounce brick');
+                tile.bounceDuration = BOUNCE_DURATION;
+            }
+        });
+    }
+    handlePowerup(tile) {
+        this.powerup = tile;
+        this.queue((entity, deltaTime, level) => {
+            const x = this.powerup.l / 16;
+            const y = this.powerup.t / 16;
+            const tile = level.tileCollider.tiles.matrix.grid[x][y];
+            if (tile.contains.length) {
+                tile.bounceDuration = BOUNCE_DURATION;
+                tile.queuePop = true;
+            }
         });
     }
     obstruct(entity, side, match) {
@@ -23,15 +43,9 @@ export default class Uppercut extends Trait {
         }
         if (side === Sides.TOP) {
             if (match.tile.type === "brick") {
-                if (entity.Shift.size === Size.LG) {
-                    console.log('break brick');
-                } else {
-                    console.log('bounce brick');
-                    this.bounceTile(match);
-                }
+                this.handleBrick(match, entity);
             } else if (match.tile.type === "powerup") {
-                console.log('bounce & pop powerup');
-                this.bounceTile(match);
+                this.handlePowerup(match);
             }
         }
     }

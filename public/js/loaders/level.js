@@ -9,7 +9,7 @@ function createMatrix(tiles, patterns) {
     const grid = new Matrix();
 
     for (const {tile, x, y} of expandTiles(tiles, patterns)) {
-        grid.set(x, y, {name: tile.name, type: tile.type});
+        grid.set(x, y, {name: tile.name, type: tile.type, contains: tile.contains ? tile.contains.slice():undefined});
     }
 
     return grid;

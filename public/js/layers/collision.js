@@ -36,14 +36,30 @@ function bounceHeightCurve(bounceDuration, deltaTime) {
 }
 
 function drawTile(tile, x, y, level, sprites, context, startIndex, endIndex, deltaTime) {
-    if (tile.bounceDuration > 0) {
-        y += bounceHeightCurve(tile.bounceDuration, deltaTime);
-        tile.bounceDuration -= deltaTime;
-        if (tile.bounceDuration < 0) {
-            tile.bounceDuration = 0;
+    if (tile.type === "brick") {
+        if (tile.bounceDuration > 0) {
+            y += bounceHeightCurve(tile.bounceDuration, deltaTime);
+            tile.bounceDuration -= deltaTime;
         }
-    }
-    if (sprites.animations.has(tile.name)) {
+        sprites.drawTile(tile.name, context, x - startIndex, y);
+    } else if (tile.type === "powerup") {
+        if (tile.bounceDuration > 0) {
+            y += bounceHeightCurve(tile.bounceDuration, deltaTime);
+            tile.bounceDuration -= deltaTime;
+        }
+        if (tile.queuePop) {
+            if (tile.contains.length) {
+                const item = tile.contains.pop();
+                console.log('Item', item);
+            }
+            tile.queuePop = false;
+        }
+        if (tile.contains.length) {
+            sprites.drawAnimation(tile.name, context, x-startIndex, y, level.totalTime);
+        } else {
+            sprites.drawTile(tile.name + "-empty", context, x - startIndex, y);
+        }
+    } else if (sprites.animations.has(tile.name)) {
         sprites.drawAnimation(tile.name, context, x-startIndex, y, level.totalTime);
     } else {
         sprites.drawTile(tile.name, context, x - startIndex, y);

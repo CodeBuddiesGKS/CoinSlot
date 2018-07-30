@@ -195,9 +195,11 @@
         {
           "name": "ow-powerup",
           "type": "powerup",
+          "contains": [
+            "coin"
+          ],
           "ranges": [
             [16, 9],
-            [21, 9],
             [23, 9],
             [22, 5],
             [78, 9],
@@ -211,6 +213,16 @@
             [129, 2, 5],
     
             [170, 9]
+          ]
+        },
+        {
+          "name": "ow-powerup",
+          "type": "powerup",
+          "contains": [
+            "upgrade"
+          ],
+          "ranges": [
+            [21, 9]
           ]
         },
         {
