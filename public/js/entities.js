@@ -1,6 +1,7 @@
+import {loadAvatar} from './entities/Avatar.js';
 import {loadGoomba} from './entities/Goomba.js';
 import {loadKoopa} from './entities/Koopa.js';
-import {loadAvatar} from './entities/Avatar.js';
+import {loadMushroom} from './entities/Mushroom.js';
 
 export function loadEntityFactory() {
     const entityFactories = {};
@@ -10,9 +11,15 @@ export function loadEntityFactory() {
     }
 
     return Promise.all([
+        // Load Avatars
         loadAvatar().then(addFactory('avatar')),
+
+        // Load NPCs
         loadGoomba().then(addFactory('goomba')),
-        loadKoopa().then(addFactory('koopa'))
+        loadKoopa().then(addFactory('koopa')),
+
+        // Load Items
+        loadMushroom().then(addFactory('mushroom'))
     ])
     .then(() => entityFactories);
 }

@@ -1,6 +1,6 @@
 {
   "imageURL": "img/items.png",
-  "items": [
+  "frames": [
     {
       "name": "ow-brick-donut",
       "rect": [64, 0, 16, 16]
@@ -8,6 +8,22 @@
     {
       "name": "ow-brick-donuthole",
       "rect": [64, 16, 16, 16]
+    },
+    {
+      "name": "coin-1",
+      "rect": [48, 96, 16, 16]
+    },
+    {
+      "name": "coin-2",
+      "rect": [32, 96, 16, 16]
+    },
+    {
+      "name": "coin-3",
+      "rect": [16, 96, 16, 16]
+    },
+    {
+      "name": "coin-4",
+      "rect": [0, 96, 16, 16]
     },
     {
       "name": "fireball-1",
@@ -24,9 +40,23 @@
     {
       "name": "fireball-4",
       "rect": [104, 152, 8, 8]
+    },
+    {
+      "name": "ow-mushroom-1",
+      "rect": [0, 0, 16, 16]
     }
   ],
   "animations": [
+    {
+      "name": "coin",
+      "frameLength": 8,
+      "frames": [
+        "coin-4",
+        "coin-3",
+        "coin-2",
+        "coin-1"
+      ]
+    },
     {
       "name": "fireball",
       "frameLength": 8,

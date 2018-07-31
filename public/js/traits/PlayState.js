@@ -14,6 +14,9 @@ export default class PlayState extends Trait {
         this.world = '1-1';
     }
     update(entity, deltaTime, level) {
+        if (!this.on) {
+            return;
+        }
         if (level.entities.has(this.avatar)) {
             if (this.time > 0) {
                 //this.time -= deltaTime * 3;
@@ -56,5 +59,11 @@ export default class PlayState extends Trait {
         //     avatar.bounds.left = this.camera.position.x;
         //     avatar.velocity.x = 0;
         // }
+    }
+    get on() {
+        return this.isOn;
+    }
+    set on(isOn) {
+        this.isOn = isOn;
     }
 }

@@ -5,6 +5,9 @@ export default class Physics extends Trait {
         super('Physics');
     }
     update(entity, deltaTime, level) {
+        if (!this.on) {
+            return;
+        }
         entity.position.x += entity.velocity.x * deltaTime;
         level.tileCollider.checkX(entity);
 
@@ -12,5 +15,11 @@ export default class Physics extends Trait {
         level.tileCollider.checkY(entity);
 
         entity.velocity.y += level.gravity * deltaTime;
+    }
+    get on() {
+        return this.isOn;
+    }
+    set on(isOn) {
+        this.isOn = isOn;
     }
 }

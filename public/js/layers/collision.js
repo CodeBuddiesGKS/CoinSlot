@@ -51,6 +51,12 @@ function drawTile(tile, x, y, level, sprites, context, startIndex, endIndex, del
             if (tile.contains.length) {
                 const item = tile.contains.pop();
                 console.log('Item', item);
+                if (item === "upgrade") {
+                    //check marios size
+                    const mushroom = level.entityFactory.mushroom();
+                    mushroom.position.set(x*sprites.width, y*sprites.height - 1);
+                    level.entities.add(mushroom);
+                }
             }
             tile.queuePop = false;
         }

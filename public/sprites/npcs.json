@@ -1,0 +1,51 @@
+{
+  "imageURL": "img/npcs.gif",
+  "frames": [
+    {
+      "name": "goomba-walk-1",
+      "rect": [296, 187, 16, 16]
+    },
+    {
+      "name": "goomba-walk-2",
+      "rect": [315, 187, 16, 16]
+    },
+    {
+      "name": "goomba-dead",
+      "rect": [277, 187, 16, 16]
+    },
+    {
+      "name": "koopa-walk-1",
+      "rect": [296, 206, 16, 24]
+    },
+    {
+      "name": "koopa-walk-2",
+      "rect": [315, 206, 16, 24]
+    },
+    {
+      "name": "koopa-shell",
+      "rect": [144, 206, 16, 24]
+    },
+    {
+      "name": "koopa-shell-with-legs",
+      "rect": [163, 206, 16, 24]
+    }
+  ],
+  "animations": [
+    {
+      "name": "goomba-walk",
+      "frameLength": 0.15,
+      "frames": [
+        "goomba-walk-1",
+        "goomba-walk-2"
+      ]
+    },
+    {
+      "name": "koopa-walk",
+      "frameLength": 0.15,
+      "frames": [
+        "koopa-walk-1",
+        "koopa-walk-2"
+      ]
+    }
+  ]
+}

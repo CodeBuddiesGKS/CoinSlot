@@ -38,7 +38,10 @@ export default class Uppercut extends Trait {
         });
     }
     obstruct(entity, side, match) {
-        if (!entity.Solid.obstructs) {
+        if (!this.on) {
+            return;
+        }
+        if (!entity.Solid.on) {
             return;
         }
         if (side === Sides.TOP) {
@@ -48,5 +51,11 @@ export default class Uppercut extends Trait {
                 this.handlePowerup(match);
             }
         }
+    }
+    get on() {
+        return this.isOn;
+    }
+    set on(isOn) {
+        this.isOn = isOn;
     }
 }

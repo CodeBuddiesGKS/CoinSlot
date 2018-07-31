@@ -21,6 +21,9 @@ export default class Jump extends Trait {
         this.engageTime = 0;
     }
     obstruct(entity, side) {
+        if (!this.on) {
+            return;
+        }
         if (side === Sides.BOTTOM) {
             this.airTime = -1;
         } else if (side === Sides.TOP) {
@@ -28,6 +31,9 @@ export default class Jump extends Trait {
         }
     }
     update(entity, deltaTime, level) {
+        if (!this.on) {
+            return;
+        }
         if (this.requestTime > 0) {
             if (this.airTime < 0) {
                 this.engageTime = this.duration;
@@ -41,5 +47,17 @@ export default class Jump extends Trait {
             this.engageTime -= deltaTime;
         }
         ++this.airTime;
+    }
+    get on() {
+        return this.isOn;
+    }
+    set on(isOn) {
+        this.isOn = isOn;
+        this.queue((entity, deltaTime, level) => {
+            entity.velocity.y = 0;
+            this.airTime = 0;
+            this.engageTime = 0;
+            this.requestTime = 0;
+        });
     }
 }

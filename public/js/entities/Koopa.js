@@ -11,20 +11,20 @@ const STATE_WAKING = Symbol('waking');
 const STATE_SLIDING = Symbol('sliding');
 
 export function loadKoopa() {
-    return loadSpriteSheet('koopa').then(koopaSprite => {
-        return createKoopaFactory(koopaSprite);
+    return loadSpriteSheet('npcs').then(sprite => {
+        return createKoopaFactory(sprite);
     });
 }
 
-function createKoopaFactory(koopaSprite) {
-    const walkAnimation = koopaSprite.animations.get('walk');
+function createKoopaFactory(sprite) {
+    const walkAnimation = sprite.animations.get('koopa-walk');
 
     function getAnimationFrame(koopa) {
         if (koopa.Behavior.state === STATE_HIDING
             || koopa.Behavior.state === STATE_SLIDING) {
-            return 'shell';
+            return 'koopa-shell';
         } else if (koopa.Behavior.state === STATE_WAKING) {
-            return 'shell-with-legs';
+            return 'koopa-shell-with-legs';
         } else if (koopa.Behavior.state === STATE_WALKING) {
             return walkAnimation(koopa.lifetime);
         }
@@ -33,7 +33,7 @@ function createKoopaFactory(koopaSprite) {
     function drawKoopa(context) {
         const flip = this.PendulumMove.dir === -1;
         const frame = getAnimationFrame(this);
-        koopaSprite.draw(frame, context, 0, 0, flip);
+        sprite.draw(frame, context, 0, 0, flip);
     }
 
     return () => {
@@ -69,7 +69,7 @@ class Behavior extends Trait {
         // this.state = STATE_HIDING;
         // koopa.Killable.kill();
         // koopa.velocity.set(100, -200);
-        // koopa.Solid.obstructs = false;
+        // koopa.Solid.on = false;
 
         if (them.Stomp) {
             if (isStomping) {
@@ -105,7 +105,7 @@ class Behavior extends Trait {
                     this.enemyRicochet(koopa, them);
                     break;
                 case STATE_SLIDING:
-                    them.PendulumMove.enabled = 0;
+                    them.PendulumMove.on = false;
                     them.Killable.kill();
                     break;
             }
@@ -123,12 +123,12 @@ class Behavior extends Trait {
     setStateToHide(koopa, them) {
         this.state = STATE_HIDING;
         this.hideTime = 0;
-        koopa.PendulumMove.enabled = 0;
+        koopa.PendulumMove.on = false;
         koopa.PendulumMove.speed = koopa.PendulumMove.walkSpeed;
     }
     setStateToSlide(koopa, them) {
         this.state = STATE_SLIDING;
-        koopa.PendulumMove.enabled = 1;
+        koopa.PendulumMove.on = true;
         koopa.PendulumMove.speed = koopa.PendulumMove.slideSpeed;
         if (them.bounds.centerX < koopa.bounds.centerX) {
             koopa.PendulumMove.dir = 1;
@@ -144,7 +144,7 @@ class Behavior extends Trait {
     }
     setStateToWalk(koopa) {
         this.state = STATE_WALKING;
-        koopa.PendulumMove.enabled = 1;
+        koopa.PendulumMove.on = true;
     }
     update(entity, deltaTime, level) {
         if (this.state === STATE_HIDING) {

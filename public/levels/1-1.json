@@ -10,18 +10,6 @@
       "position": [32, 184]
     }
   ],
-  "item-layers": [
-    {
-      "items": [
-        {
-          "name": "ow-brick-donut",
-          "ranges": [
-            [10, 10]
-          ]
-        }
-      ]
-    }
-  ],
   "layers": [
     {
       "tiles": [

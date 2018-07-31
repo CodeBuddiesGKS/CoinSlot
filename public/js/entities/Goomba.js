@@ -6,24 +6,24 @@ import Solid from '../traits/Solid.js';
 import {loadSpriteSheet} from '../loaders/loaders.js';
 
 export function loadGoomba() {
-    return loadSpriteSheet('goomba').then(goombaSprite => {
-        return createGoombaFactory(goombaSprite);
+    return loadSpriteSheet('npcs').then(sprite => {
+        return createGoombaFactory(sprite);
     });
 }
 
-function createGoombaFactory(goombaSprite) {
-    const walkAnimation = goombaSprite.animations.get('walk');
+function createGoombaFactory(sprite) {
+    const walkAnimation = sprite.animations.get('goomba-walk');
 
     function getAnimationFrame(goomba) {
         if (goomba.Killable.isDead) {
-            return 'dead';
+            return 'goomba-dead';
         }
         return walkAnimation(goomba.lifetime);
     }
 
     function drawGoomba(context) {
         const frame = getAnimationFrame(this);
-        goombaSprite.draw(frame, context, 0, 0);
+        sprite.draw(frame, context, 0, 0);
     }
 
     return () => {
@@ -52,7 +52,7 @@ class Behavior extends Trait {
         }
         if (them.Stomp) {
             if (isStomping) {
-                goomba.PendulumMove.enabled = 0;
+                goomba.PendulumMove.on = false;
                 goomba.Killable.kill();
             } else {
                 them.Killable.kill();

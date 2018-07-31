@@ -3,10 +3,9 @@ import {Sides, Trait} from '../Entity.js';
 export default class Solid extends Trait {
     constructor() {
         super('Solid');
-        this.obstructs = true;
     }
     obstruct(entity, side, match) {
-        if (!this.obstructs) {
+        if (!this.on) {
             return;
         }
         if (side === Sides.TOP) {
@@ -22,5 +21,11 @@ export default class Solid extends Trait {
             entity.bounds.right = match.l;
             entity.velocity.x = 0;
         }
+    }
+    get on() {
+        return this.isOn;
+    }
+    set on(isOn) {
+        this.isOn = isOn;
     }
 }

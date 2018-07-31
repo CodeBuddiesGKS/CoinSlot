@@ -207,7 +207,7 @@
     },
     {
       "name": "grow",
-      "frameLength": 8,
+      "frameLength": 0.1,
       "frames": [
         "sm", "md",
         "sm", "md",
@@ -217,7 +217,7 @@
     },
     {
       "name": "toFire",
-      "frameLength": 8,
+      "frameLength": 0.1,
       "frames": [
         "wyr", "gwy", "rwy", "bwc",
         "wyr", "gwy", "rwy", "bwc",

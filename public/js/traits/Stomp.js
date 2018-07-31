@@ -19,4 +19,10 @@ export default class Stomp extends Trait {
             this.bounce(us, them);
         }
     }
+    get on() {
+        return this.isOn;
+    }
+    set on(isOn) {
+        this.isOn = isOn;
+    }
 }

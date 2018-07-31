@@ -50,6 +50,7 @@ export default class Entity {
 
 export class Trait {
     constructor(name) {
+        this.isOn = true;
         this.NAME = name;
         this.tasks = [];
     }

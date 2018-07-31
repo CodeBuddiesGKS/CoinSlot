@@ -29,11 +29,7 @@ export function loadSpriteSheet(name) {
         );
         if (sheetSpec.frames) {
             sheetSpec.frames.forEach(frameSpec => {
-                sprites.define(frameSpec.name, ...frameSpec.rect)
-            });
-        } else if (sheetSpec.items) {
-            sheetSpec.items.forEach(itemSpec => {
-                sprites.define(itemSpec.name, ...itemSpec.rect)
+                sprites.define(frameSpec.name, ...frameSpec.rect);
             });
         } else if (sheetSpec.tiles) {
             sheetSpec.tiles.forEach(tileSpec => {
@@ -43,7 +39,7 @@ export function loadSpriteSheet(name) {
         if (sheetSpec.animations) {
             sheetSpec.animations.forEach(animSpec => {
                 const animation = createAnimation(animSpec.frames, animSpec.frameLength);
-                sprites.defineAnimation(animSpec.name, animation)
+                sprites.defineAnimation(animSpec.name, animation);
             });
         }
         return sprites;

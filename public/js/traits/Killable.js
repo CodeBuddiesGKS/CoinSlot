@@ -15,6 +15,10 @@ export default class Killable extends Trait {
         this.isDead = false;
     }
     update(entity, deltaTime, level) {
+        if (!this.on) {
+            return;
+        }
+
         if (this.isDead) {
             this.deadTime += deltaTime;
             if (this.deadTime > this.decomposeTime) {
@@ -23,8 +27,13 @@ export default class Killable extends Trait {
         }
 
         if (entity.position.y > 240) {
-            this.decomposeTime = 0;
-            this.kill();
+            this.queue(() => level.entities.delete(entity));
         }
+    }
+    get on() {
+        return this.isOn;
+    }
+    set on(isOn) {
+        this.isOn = isOn;
     }
 }

@@ -11,6 +11,10 @@ export default class Go extends Trait {
         this.dragCoefficient;
     }
     update(entity, deltaTime, level) {
+        if (!this.on) {
+            return;
+        }
+
         const absX = Math.abs(entity.velocity.x);
 
         if (this.dir !== 0) {
@@ -39,5 +43,15 @@ export default class Go extends Trait {
         } else {
             this.distance += absX * deltaTime;
         }
+    }
+    get on() {
+        return this.isOn;
+    }
+    set on(isOn) {
+        this.isOn = isOn;
+        this.queue((entity, deltaTime, level) => {
+            entity.velocity.x = 0;
+            this.distance = 0;
+        });
     }
 }

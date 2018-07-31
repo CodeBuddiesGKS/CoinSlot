@@ -77,18 +77,20 @@ export function createLevelFactory(entityFactory) {
             ]))
             .then(([levelSpec, tileSprites]) => {
                 const level = new Level();
+                
+                level.entityFactory = entityFactory;
 
                 setupTileLayers(levelSpec, level, tileSprites);
-                setupEntityLayer(levelSpec, level, entityFactory);
+                setupEntityLayer(levelSpec, level);
 
                 return level;
             });
     }
 }
 
-function setupEntityLayer(levelSpec, level, entityFactory) {
+function setupEntityLayer(levelSpec, level) {
     levelSpec.entities.forEach(({name, position: [x, y]}) => {
-        const entity = entityFactory[name]();
+        const entity = level.entityFactory[name]();
         entity.position.set(x, y);
         level.entities.add(entity);
     });

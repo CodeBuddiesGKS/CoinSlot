@@ -25,9 +25,30 @@ function createAvatarFactory(avatarSprite) {
         avatarSprite.draw(frame, context, 0, 0, flip);
     }
     function getFrame(avatar) {
-        // let color = avatarSprite.animations.get('toFire')(avatar.Go.distance);
-        let color = Symbol.keyFor(avatar.Shift.color);
-        let size = Symbol.keyFor(avatar.Shift.size);
+        let color, size;
+        if (avatar.Shift.isBurning) {
+            color = avatarSprite.animations.get('toFire')(avatar.Shift.burnDuration);
+        } else {
+            color = Symbol.keyFor(avatar.Shift.color);
+        }
+        if (avatar.Shift.isGrowing) {
+            size = avatarSprite.animations.get('grow')(avatar.Shift.growDuration);
+            const prevSize = avatar.size.y;
+            let newSize;
+            if (size === "sm") {
+                newSize = 16;
+            } else if (size === "md") {
+                newSize = 24;
+            } else if (size === "lg") {
+                newSize = 32;
+            }
+            const deltaY = prevSize-newSize;
+            avatar.size.y = newSize;
+            avatar.position.y += deltaY;
+        } else {
+            size = Symbol.keyFor(avatar.Shift.size);
+        }
+        
         let frame = size + '-' + color + '-';
 
         if (avatar.Jump.freeFall) {
