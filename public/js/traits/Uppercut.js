@@ -16,11 +16,9 @@ export default class Uppercut extends Trait {
             const tile = level.tileCollider.tiles.matrix.grid[x][y];
             
             if (this.entity.Shift.size === Size.LG) {
-                console.log('break brick');
-                // tile.name = 'ow-sky';
-                // tile.type = undefined;
+                tile.name = 'ow-sky';
+                tile.type = undefined;
             } else {
-                console.log('bounce brick');
                 tile.bounceDuration = BOUNCE_DURATION;
             }
         });

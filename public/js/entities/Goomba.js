@@ -58,7 +58,16 @@ class Behavior extends Trait {
                 them.Killable.kill();
             }
         } else {
-            goomba.PendulumMove.dir = -goomba.PendulumMove.dir;
+            this.enemyRicochet(goomba, them);
+        }
+    }
+    enemyRicochet(goomba, them) {
+        if (goomba.PendulumMove.dir === 1) {
+            goomba.PendulumMove.dir = -1;
+            goomba.bounds.right = them.bounds.left - 1;
+        } else {
+            goomba.PendulumMove.dir = 1;
+            goomba.bounds.left = them.bounds.right + 1;
         }
     }
 }
