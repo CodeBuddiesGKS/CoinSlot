@@ -14,21 +14,22 @@ export function loadMushroom() {
 }
 
 function createMushroomFactory(sprite) {
-    function getAnimationFrame(mushroom) {
-        return 'ow-mushroom-1';
-    }
-
     function draw(context) {
         const frame = getAnimationFrame(this);
         sprite.draw(frame, context, 0, 0);
     }
+    
+    function getAnimationFrame(mushroom) {
+        return 'ow-mushroom-1';
+    }
+
 
     return () => {
         const mushroom = new Entity();
         mushroom.size.set(16, 16);
         mushroom.addTrait(new Behavior());
         mushroom.addTrait(new Consumable());
-        mushroom.addTrait(new PendulumMove(1));
+        mushroom.addTrait(new PendulumMove(1, 50));
         mushroom.addTrait(new Physics());
         mushroom.addTrait(new Solid());
         mushroom.draw = draw;

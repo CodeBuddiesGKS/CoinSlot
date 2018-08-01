@@ -36,30 +36,11 @@ function bounceHeightCurve(bounceDuration, deltaTime) {
 }
 
 function drawTile(tile, x, y, level, sprites, context, startIndex, endIndex, deltaTime) {
-    if (tile.type === "brick") {
-        if (tile.bounceDuration > 0) {
-            y += bounceHeightCurve(tile.bounceDuration, deltaTime);
-            tile.bounceDuration -= deltaTime;
-        }
-        sprites.drawTile(tile.name, context, x - startIndex, y);
-    } else if (tile.type === "powerup") {
-        if (tile.bounceDuration > 0) {
-            y += bounceHeightCurve(tile.bounceDuration, deltaTime);
-            tile.bounceDuration -= deltaTime;
-        }
-        if (tile.queuePop) {
-            if (tile.contains.length) {
-                const item = tile.contains.pop();
-                console.log('Item', item);
-                if (item === "upgrade") {
-                    //check marios size
-                    const mushroom = level.entityFactory.mushroom();
-                    mushroom.position.set(x*sprites.width, y*sprites.height - 1);
-                    level.entities.add(mushroom);
-                }
-            }
-            tile.queuePop = false;
-        }
+    if (tile.bounceDuration > 0) {
+        y += bounceHeightCurve(tile.bounceDuration, deltaTime);
+        tile.bounceDuration -= deltaTime;
+    }
+    if (tile.type === "powerup") {
         if (tile.contains.length) {
             sprites.drawAnimation(tile.name, context, x-startIndex, y, level.totalTime);
         } else {

@@ -1,11 +1,11 @@
 import {Trait, Sides} from '../Entity.js';
 
 export default class PendulumMove extends Trait {
-    constructor(dir = -1) {
+    constructor(dir = -1, walkSpeed = 30) {
         super('PendulumMove');
         this.dir = dir;
         this.slideSpeed = 200;
-        this.walkSpeed = 30
+        this.walkSpeed = walkSpeed;
 
         this.speed = this.walkSpeed;
     }

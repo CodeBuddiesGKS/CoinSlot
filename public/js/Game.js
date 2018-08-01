@@ -46,7 +46,7 @@ export default class Game {
         const levelFactory = createLevelFactory(entityFactory);
         this.level = await levelFactory('1-1');
         this.level.comp.layers.set('dashboardLayer', dashboardLayer);
-        this.level.entities.add(this.players[0]);
+        this.level.entities.add(this.currPlayer);
     
         //// Tools
         // tools.enableMouseControl(canvas, this.camera, this.level, this.currPlayer.PlayState.avatar);

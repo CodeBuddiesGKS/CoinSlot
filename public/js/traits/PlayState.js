@@ -18,6 +18,10 @@ export default class PlayState extends Trait {
             return;
         }
         if (level.entities.has(this.avatar)) {
+            this.avatar.itemQueue.forEach(item => {
+                this.processItem(item);
+            });
+            this.avatar.itemQueue.length = 0;
             if (this.time > 0) {
                 //this.time -= deltaTime * 3;
                 this.followAvatar(this.avatar);
@@ -59,6 +63,12 @@ export default class PlayState extends Trait {
         //     avatar.bounds.left = this.camera.position.x;
         //     avatar.velocity.x = 0;
         // }
+    }
+    processItem(item) {
+        if (item === "coin") {
+            this.score += 200;
+            this.coins += 1;
+        }
     }
     get on() {
         return this.isOn;

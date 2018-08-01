@@ -49,7 +49,7 @@
   "animations": [
     {
       "name": "coin",
-      "frameLength": 8,
+      "frameLength": 0.05,
       "frames": [
         "coin-4",
         "coin-3",
@@ -59,7 +59,7 @@
     },
     {
       "name": "fireball",
-      "frameLength": 8,
+      "frameLength": 0.1,
       "frames": [
         "fireball-4",
         "fireball-1",

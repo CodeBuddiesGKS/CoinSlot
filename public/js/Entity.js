@@ -11,6 +11,7 @@ export const Sides = {
 export default class Entity {
     constructor() {
         this.lifetime = 0;
+        this.itemQueue = [];
         this.offset = new Vector(0, 0);
         this.position = new Vector(0, 0);
         this.size = new Vector(0, 0);
@@ -43,7 +44,7 @@ export default class Entity {
         this.traits.forEach(trait => {
             trait.update(this, deltaTime, level);
         });
-        
+
         this.lifetime += deltaTime;
     }
 }
