@@ -1,10 +1,5 @@
 import Entity, {Trait} from '../Entity.js';
-import Consumable from '../traits/Consumable.js';
-import Killable from '../traits/Killable.js';
-import PendulumMove from '../traits/PendulumMove.js';
 import Physics from '../traits/Physics.js';
-import {Size} from '../traits/Shift.js';
-import Solid from '../traits/Solid.js';
 import {loadSpriteSheet} from '../loaders/loaders.js';
 
 export function loadCoin() {
@@ -26,6 +21,7 @@ function createCoinFactory(sprite) {
     return () => {
         const coin = new Entity();
         coin.size.set(16, 16);
+        coin.velocity.y = -336;
         coin.addTrait(new Behavior());
         coin.addTrait(new Physics());
         coin.draw = draw;

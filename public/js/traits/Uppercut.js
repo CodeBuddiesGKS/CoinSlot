@@ -10,8 +10,9 @@ export default class Uppercut extends Trait {
     handleBrick(tile) {
         this.brick = tile;
         this.queue((entity, deltaTime, level) => {
-            const x = this.brick.l / 16;
-            const y = this.brick.t / 16;
+            const tileSize = level.tileCollider.tiles.tileSize;
+            const x = this.brick.l / tileSize;
+            const y = this.brick.t / tileSize;
             const tile = level.tileCollider.tiles.matrix.grid[x][y];
             
             if (entity.Shift.size === Size.LG) {
@@ -19,6 +20,9 @@ export default class Uppercut extends Trait {
                 tile.type = undefined;
                 // spawn a broken brick with Physics turned off
                 // spawn 4 pieces with Solid turned off
+                const brokenBrick = level.entityFactory.brokenBrick();
+                brokenBrick.position.set(x*tileSize, y*tileSize);
+                level.entities.add(brokenBrick);
             } else {
                 tile.bounceDuration = BOUNCE_DURATION;
             }
@@ -27,7 +31,7 @@ export default class Uppercut extends Trait {
     handlePowerup(tile) {
         this.powerup = tile;
         this.queue((entity, deltaTime, level) => {
-            const tileSize = level.tileCollider.tiles.tileSize
+            const tileSize = level.tileCollider.tiles.tileSize;
             const x = this.powerup.l / tileSize;
             const y = this.powerup.t / tileSize;
             const tile = level.tileCollider.tiles.matrix.grid[x][y];
@@ -40,7 +44,6 @@ export default class Uppercut extends Trait {
                     const coin = level.entityFactory.coin();
                     coin.Behavior.avatar = entity;
                     coin.position.set(x*tileSize, y*tileSize - tileSize);
-                    coin.velocity.y = -336;
                     level.entities.add(coin);
                 } else if (item === "upgrade") {
                     //check marios size to determine item

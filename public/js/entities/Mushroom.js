@@ -1,9 +1,7 @@
 import Entity, {Trait} from '../Entity.js';
 import Consumable from '../traits/Consumable.js';
-import Killable from '../traits/Killable.js';
 import PendulumMove from '../traits/PendulumMove.js';
 import Physics from '../traits/Physics.js';
-import {Size} from '../traits/Shift.js';
 import Solid from '../traits/Solid.js';
 import {loadSpriteSheet} from '../loaders/loaders.js';
 
@@ -18,7 +16,7 @@ function createMushroomFactory(sprite) {
         const frame = getAnimationFrame(this);
         sprite.draw(frame, context, 0, 0);
     }
-    
+
     function getAnimationFrame(mushroom) {
         return 'ow-mushroom-1';
     }

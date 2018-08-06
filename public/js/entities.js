@@ -1,6 +1,9 @@
 import {loadAvatar} from './entities/Avatar.js';
+
 import {loadGoomba} from './entities/Goomba.js';
 import {loadKoopa} from './entities/Koopa.js';
+
+import {loadBrokenBrick} from './entities/BrokenBrick.js';
 import {loadCoin} from './entities/Coin.js';
 import {loadMushroom} from './entities/Mushroom.js';
 
@@ -20,6 +23,7 @@ export function loadEntityFactory() {
         loadKoopa().then(addFactory('koopa')),
 
         // Load Items
+        loadBrokenBrick().then(addFactory('brokenBrick')),
         loadCoin().then(addFactory('coin')),
         loadMushroom().then(addFactory('mushroom'))
     ])
