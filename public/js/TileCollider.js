@@ -89,5 +89,5 @@ function callObstructForY(entity, matches, y) {
 function isObstructable(match) {
     return match.tile.type === 'impassable'
         || match.tile.type === 'brick'
-        || match.tile.type === 'powerup';
+        || match.tile.type && match.tile.type.includes('powerup');
 }

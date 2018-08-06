@@ -23,7 +23,7 @@ export default class PlayState extends Trait {
             });
             this.avatar.itemQueue.length = 0;
             if (this.time > 0) {
-                //this.time -= deltaTime * 3;
+                this.time -= deltaTime * 3;
                 this.followAvatar(this.avatar);
             } else {
                 this.time = 0;
@@ -68,6 +68,8 @@ export default class PlayState extends Trait {
         if (item === "coin") {
             this.score += 200;
             this.coins += 1;
+        } else if (item === "flower" || item === "mushroom") {
+            this.score += 1000;
         }
     }
     get on() {

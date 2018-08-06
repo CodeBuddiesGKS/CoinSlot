@@ -5,14 +5,15 @@ export default class EntityCollider {
         this.entities = entities;
     }
 
-    check(subject) {
-        this.entities.forEach(candidate => {
-            if (subject === candidate) {
-                return;
-            }
-            if (subject.bounds.overlaps(candidate.bounds)) {
-                subject.collides(candidate);
-                candidate.collides(subject);
+    check() {
+        const entityArray = [...this.entities.values()];
+        entityArray.forEach((subject, sIndex) => {
+            for (let cIndex=sIndex+1; cIndex<entityArray.length; ++cIndex) {
+                let candidate = entityArray[cIndex];
+                if (subject.bounds.overlaps(candidate.bounds)) {
+                    subject.collides(candidate);
+                    candidate.collides(subject);
+                }
             }
         });
     }

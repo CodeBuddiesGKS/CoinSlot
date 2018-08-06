@@ -24,30 +24,17 @@ export default class Shift extends Trait {
     constructor() {
         super('Shift');
         this.color = Color.RYG;
-        this.growDuration = 0;
-        this.growTime = 1;
+        this.burnTime = 0;
+        this.burnTimeLimit = 56/60;
+        this.growTime = 0;
+        this.growTimeLimit = 60/60;
         this.isGrowing = false;
+        this.isBurning = false;
         this.size = Size.SM;
     }
     collides(us, them) {
-        // if avatar collides with a mushroom
-        if (false) {
-            // mushroom.delete
-
-            // this.size === 'sm'
-            if (false) {
-                // freeze all entities (mario, npcs, items)
-                // activate avatar.grow() animation
-                // avatar.size.y = 32;
-                // avatar.Shift.size = 'lg', might do this automatically in the animation
-            } else {
-                // add to Players score
-            }
-
-        }
-
         // if avatar.Shift.size === 'lg' && nudges enemy
-        else if (false) {
+        if (false) {
             // activate avatar.shrink() animation
             // avatar.Solid.on = false? or avatar.Killable.isKillable = false? new thing?
             // avatar.size.y = 16;
@@ -64,23 +51,56 @@ export default class Shift extends Trait {
         }
     }
     grow(us) {
-        this.queue(() => {
-            this.isGrowing = true;
-            us.Go.on = false;
-            us.Jump.on = false;
-            us.Physics.on = false;
-        });
+        if (this.size === Size.SM) {
+            this.queue(() => {
+                this.isGrowing = true;
+                us.Go.on = false;
+                us.Jump.on = false;
+                us.Physics.on = false;
+            });
+        }
+    }
+    shrink(us) {
+        if (this.size === Size.LG) {
+            this.queue(() => {
+                this.isGrowing = true;
+                us.Go.on = false;
+                us.Jump.on = false;
+                us.Physics.on = false;
+            });
+        }
+    }
+    toFire(us) {
+        if (this.size === Size.LG) {
+            this.queue(() => {
+                this.isBurning = true;
+                us.Go.on = false;
+                us.Jump.on = false;
+                us.Physics.on = false;
+            });
+        }
     }
     update(entity, deltaTime, level) {
         if (!this.on) {
             return;
         }
         if (this.isGrowing) {
-            this.growDuration += deltaTime;
-            if (this.growDuration > this.growTime) {
+            this.growTime += deltaTime;
+            if (this.growTime > this.growTimeLimit) {
                 this.queue(() => {
                     this.isGrowing = false;
                     this.size = Size.LG;
+                    entity.Go.on = true;
+                    entity.Jump.on = true;
+                    entity.Physics.on = true;
+                });
+            }
+        } else if (this.isBurning) {
+            this.burnTime += deltaTime;
+            if (this.burnTime > this.burnTimeLimit) {
+                this.queue(() => {
+                    this.isBurning = false;
+                    this.color = Color.WYR;
                     entity.Go.on = true;
                     entity.Jump.on = true;
                     entity.Physics.on = true;
@@ -94,8 +114,10 @@ export default class Shift extends Trait {
     set on(isOn) {
         this.isOn = isOn;
         this.queue((entity, deltaTime, level) => {
+            this.isBurning = false;
             this.isGrowing = false;
-            this.growDuration = 0;
+            this.burnTime = 0;
+            this.growTime = 0;
         });
     }
 }

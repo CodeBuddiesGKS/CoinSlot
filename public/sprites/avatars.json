@@ -217,7 +217,7 @@
     },
     {
       "name": "toFire",
-      "frameLength": 0.1,
+      "frameLength": 0.05,
       "frames": [
         "wyr", "gwy", "rwy", "bwc",
         "wyr", "gwy", "rwy", "bwc",

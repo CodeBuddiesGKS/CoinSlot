@@ -15,6 +15,10 @@ export default class Physics extends Trait {
         level.tileCollider.checkY(entity);
 
         entity.velocity.y += level.gravity * deltaTime;
+
+        if (entity.position.y > 240) {
+            this.queue(() => level.entities.delete(entity));
+        }
     }
     get on() {
         return this.isOn;

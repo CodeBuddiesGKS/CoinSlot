@@ -19,9 +19,9 @@ export default class Level {
         this.entities.forEach(entity => {
             entity.update(deltaTime, this);
         });
-        this.entities.forEach(entity => {
-            this.entityCollider.check(entity);
-        });
+
+        this.entityCollider.check();
+
         this.entities.forEach(entity => {
             entity.finalize(deltaTime, this);
         });

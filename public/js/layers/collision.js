@@ -40,7 +40,7 @@ function drawTile(tile, x, y, level, sprites, context, startIndex, endIndex, del
         y += bounceHeightCurve(tile.bounceDuration, deltaTime);
         tile.bounceDuration -= deltaTime;
     }
-    if (tile.type === "powerup") {
+    if (tile.type && tile.type.includes("powerup")) {
         if (tile.contains.length) {
             sprites.drawAnimation(tile.name, context, x-startIndex, y, level.totalTime);
         } else {

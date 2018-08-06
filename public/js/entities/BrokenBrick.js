@@ -34,16 +34,14 @@ class Behavior extends Trait {
     constructor(state, sprite) {
         super('Behavior');
         this.quadTime = 0;
-        this.quadDuration = 2/60;
-        this.singletTime = 0;
-        this.singletDuration = 1;
+        this.quadTimeLimit = 2/60;
         this.sprite = sprite;
         this.state = state;
     }
     update(entity, deltaTime, level) {
         if (this.state === STATE_QUAD) {
             this.quadTime += deltaTime;
-            if (this.quadTime > this.quadDuration) {
+            if (this.quadTime > this.quadTimeLimit) {
                 const donutholeFactory = createDonutholeFactory(this.sprite);
                 const dh1 = donutholeFactory(entity.position, {x:-70, y:-400}, true);
                 const dh2 = donutholeFactory(entity.position, {x:70, y:-400}, false);
@@ -53,11 +51,6 @@ class Behavior extends Trait {
                 level.entities.add(dh2);
                 level.entities.add(dh3);
                 level.entities.add(dh4);
-                this.queue(() => level.entities.delete(entity));
-            }
-        } else {
-            this.singletTime += deltaTime;
-            if (this.singletTime > this.singletDuration) {
                 this.queue(() => level.entities.delete(entity));
             }
         }

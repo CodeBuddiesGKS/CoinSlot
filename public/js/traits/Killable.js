@@ -1,10 +1,10 @@
 import {Trait} from '../Entity.js';
 
 export default class Killable extends Trait {
-    constructor(decomposeTime = 0) {
+    constructor(deadTimeLimit = 0) {
         super('Killable');
         this.deadTime = 0;
-        this.decomposeTime = decomposeTime;
+        this.deadTimeLimit = deadTimeLimit;
         this.isDead = false;
     }
     kill() {
@@ -21,13 +21,9 @@ export default class Killable extends Trait {
 
         if (this.isDead) {
             this.deadTime += deltaTime;
-            if (this.deadTime > this.decomposeTime) {
+            if (this.deadTime > this.deadTimeLimit) {
                 this.queue(() => level.entities.delete(entity));
             }
-        }
-
-        if (entity.position.y > 240) {
-            this.queue(() => level.entities.delete(entity));
         }
     }
     get on() {

@@ -13,8 +13,8 @@ export default class Consumable extends Trait {
             return;
         }
 
-        if (this.isConsumed || entity.position.y > 240) {
-            this.queue(() => level.entities.delete(entity));
+        if (this.isConsumed) {
+            level.entities.delete(entity);
         }
     }
     get on() {

@@ -126,8 +126,7 @@
             [77, 3, 9],
             [80, 8, 5],
             [91, 3, 5],
-            [94, 9],
-            [100, 2, 9],
+            [100, 1, 9],
             [118, 9],
             [121, 3, 5],
             [128, 4, 5],
@@ -188,13 +187,13 @@
           ],
           "ranges": [
             [16, 9],
-            [23, 9],
+
             [22, 5],
-            [78, 9],
+            [23, 9],
+
             [94, 5],
     
             [106, 9],
-            [109, 5],
             [109, 9],
             [112, 9],
     
@@ -210,7 +209,39 @@
             "upgrade"
           ],
           "ranges": [
-            [21, 9]
+            [21, 9],
+
+            [78, 9],
+            
+            [109, 5]
+          ]
+        },
+        {
+          "name": "ow-powerup",
+          "type": "powerup-hidden",
+          "contains": [
+            "1up"
+          ],
+          "ranges": [
+            [64, 8]
+          ]
+        },
+        {
+          "name": "ow-powerup",
+          "type": "powerup-brick",
+          "contains": [
+            "star"
+          ],
+          "ranges": [
+            [101, 9]
+          ]
+        },
+        {
+          "name": "ow-powerup",
+          "type": "powerup-brick",
+          "contains": ["coin","coin","coin","coin","coin","coin","coin","coin","coin","coin","coin","coin","coin","coin"],
+          "ranges": [
+            [94, 9]
           ]
         },
         {

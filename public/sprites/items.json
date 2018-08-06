@@ -42,6 +42,22 @@
       "rect": [104, 152, 8, 8]
     },
     {
+      "name": "ow-flower-1",
+      "rect": [0, 32, 16, 16]
+    },
+    {
+      "name": "ow-flower-2",
+      "rect": [16, 32, 16, 16]
+    },
+    {
+      "name": "ow-flower-3",
+      "rect": [32, 32, 16, 16]
+    },
+    {
+      "name": "ow-flower-4",
+      "rect": [48, 32, 16, 16]
+    },
+    {
       "name": "ow-mushroom-1",
       "rect": [0, 0, 16, 16]
     }
@@ -65,6 +81,16 @@
         "fireball-1",
         "fireball-2",
         "fireball-3"
+      ]
+    },
+    {
+      "name": "ow-flower",
+      "frameLength": 0.05,
+      "frames": [
+        "ow-flower-1",
+        "ow-flower-2",
+        "ow-flower-3",
+        "ow-flower-4"
       ]
     }
   ]

@@ -46,10 +46,15 @@ export default class Uppercut extends Trait {
                     coin.position.set(x*tileSize, y*tileSize - tileSize);
                     level.entities.add(coin);
                 } else if (item === "upgrade") {
-                    //check marios size to determine item
-                    const mushroom = level.entityFactory.mushroom();
-                    mushroom.position.set(x*tileSize, y*tileSize - 1);
-                    level.entities.add(mushroom);
+                    if (entity.Shift.size === Size.SM) {
+                        const mushroom = level.entityFactory.upgrade('mushroom');
+                        mushroom.position.set(x*tileSize, y*tileSize - 1);
+                        level.entities.add(mushroom);
+                    } else {
+                        const flower = level.entityFactory.upgrade('flower');
+                        flower.position.set(x*tileSize, y*tileSize - 1);
+                        level.entities.add(flower);
+                    }
                 }
             }
         });
@@ -64,7 +69,7 @@ export default class Uppercut extends Trait {
         if (side === Sides.TOP) {
             if (match.tile.type === "brick") {
                 this.handleBrick(match);
-            } else if (match.tile.type === "powerup") {
+            } else if (match.tile.type && match.tile.type.includes("powerup")) {
                 this.handlePowerup(match);
             }
         }

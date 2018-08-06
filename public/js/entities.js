@@ -5,7 +5,7 @@ import {loadKoopa} from './entities/Koopa.js';
 
 import {loadBrokenBrick} from './entities/BrokenBrick.js';
 import {loadCoin} from './entities/Coin.js';
-import {loadMushroom} from './entities/Mushroom.js';
+import {loadUpgrade} from './entities/Upgrade.js';
 
 export function loadEntityFactory() {
     const entityFactories = {};
@@ -25,7 +25,7 @@ export function loadEntityFactory() {
         // Load Items
         loadBrokenBrick().then(addFactory('brokenBrick')),
         loadCoin().then(addFactory('coin')),
-        loadMushroom().then(addFactory('mushroom'))
+        loadUpgrade().then(addFactory('upgrade'))
     ])
     .then(() => entityFactories);
 }

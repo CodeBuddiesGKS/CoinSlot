@@ -27,12 +27,12 @@ function createAvatarFactory(avatarSprite) {
     function getFrame(avatar) {
         let color, size;
         if (avatar.Shift.isBurning) {
-            color = avatarSprite.animations.get('toFire')(avatar.Shift.burnDuration);
+            color = avatarSprite.animations.get('toFire')(avatar.Shift.burnTime);
         } else {
             color = Symbol.keyFor(avatar.Shift.color);
         }
         if (avatar.Shift.isGrowing) {
-            size = avatarSprite.animations.get('grow')(avatar.Shift.growDuration);
+            size = avatarSprite.animations.get('grow')(avatar.Shift.growTime);
             const prevSize = avatar.size.y;
             let newSize;
             if (size === "sm") {

@@ -33,9 +33,10 @@ class Behavior extends Trait {
     constructor() {
         super('Behavior');
         this.avatar;
+        this.lifeTimeLimit = 24/60;
     }
     update(entity, deltaTime, level) {
-        if (entity.lifetime > 24/60) {
+        if (entity.lifetime > this.lifeTimeLimit) {
             this.avatar.itemQueue.push("coin");
             this.queue(() => level.entities.delete(entity));
         }

@@ -54,10 +54,10 @@ class Behavior extends Trait {
     constructor() {
         super('Behavior');
         this.hideTime = 0;
-        this.hideDuration = 7;
+        this.hideTimeLimit = 7;
         this.state = STATE_WALKING;
         this.wakeTime = 0;
-        this.wakeDuration = 2;
+        this.wakeTimeLimit = 2;
     }
     collides(koopa, them) {
         const isStomping = them.velocity.y > koopa.velocity.y;
@@ -149,12 +149,12 @@ class Behavior extends Trait {
     update(entity, deltaTime, level) {
         if (this.state === STATE_HIDING) {
             this.hideTime += deltaTime;
-            if (this.hideTime > this.hideDuration) {
+            if (this.hideTime > this.hideTimeLimit) {
                 this.setStateToWake();
             }
         } else if (this.state === STATE_WAKING) {
             this.wakeTime += deltaTime;
-            if (this.wakeTime > this.wakeDuration) {
+            if (this.wakeTime > this.wakeTimeLimit) {
                 this.setStateToWalk(entity);
             }
         }
