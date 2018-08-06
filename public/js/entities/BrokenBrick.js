@@ -5,10 +5,8 @@ import {loadSpriteSheet} from '../loaders/loaders.js';
 const STATE_QUAD = Symbol('quad');
 const STATE_SINGLETS = Symbol('singlets');
 
-export function loadBrokenBrick() {
-    return loadSpriteSheet('items').then(sprite => {
-        return createBrokenBrickFactory(sprite);
-    });
+export function loadBrokenBrick(sprite) {
+    return createBrokenBrickFactory(sprite);
 }
 
 function createBrokenBrickFactory(sprite) {

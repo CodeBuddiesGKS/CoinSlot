@@ -5,10 +5,8 @@ import Physics from '../traits/Physics.js';
 import Solid from '../traits/Solid.js';
 import {loadSpriteSheet} from '../loaders/loaders.js';
 
-export function loadGoomba() {
-    return loadSpriteSheet('npcs').then(sprite => {
-        return createGoombaFactory(sprite);
-    });
+export function loadGoomba(sprite) {
+    return createGoombaFactory(sprite);
 }
 
 function createGoombaFactory(sprite) {

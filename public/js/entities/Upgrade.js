@@ -6,10 +6,8 @@ import Solid from '../traits/Solid.js';
 import {loadSpriteSheet} from '../loaders/loaders.js';
 import {Color, Size} from '../traits/Shift.js';
 
-export function loadUpgrade() {
-    return loadSpriteSheet('items').then(sprite => {
-        return createUpgradeFactory(sprite);
-    });
+export function loadUpgrade(sprite) {
+    return createUpgradeFactory(sprite);
 }
 
 function createUpgradeFactory(sprite) {

@@ -2,10 +2,8 @@ import Entity, {Trait} from '../Entity.js';
 import Physics from '../traits/Physics.js';
 import {loadSpriteSheet} from '../loaders/loaders.js';
 
-export function loadCoin() {
-    return loadSpriteSheet('items').then(sprite => {
-        return createCoinFactory(sprite);
-    });
+export function loadCoin(sprite) {
+    return createCoinFactory(sprite);
 }
 
 function createCoinFactory(sprite) {

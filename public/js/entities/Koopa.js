@@ -10,10 +10,8 @@ const STATE_HIDING = Symbol('hiding');
 const STATE_WAKING = Symbol('waking');
 const STATE_SLIDING = Symbol('sliding');
 
-export function loadKoopa() {
-    return loadSpriteSheet('npcs').then(sprite => {
-        return createKoopaFactory(sprite);
-    });
+export function loadKoopa(sprite) {
+    return createKoopaFactory(sprite);
 }
 
 function createKoopaFactory(sprite) {

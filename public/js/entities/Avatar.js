@@ -12,27 +12,25 @@ import Uppercut from '../traits/Uppercut.js';
 const FAST_DRAG = 1/5000;
 const SLOW_DRAG = 1/1500;
 
-export function loadAvatar() {
-    return loadSpriteSheet('avatars').then(avatarSprite => {
-        return createAvatarFactory(avatarSprite);
-    });
+export function loadAvatar(sprite) {
+    return createAvatarFactory(sprite);
 }
 
-function createAvatarFactory(avatarSprite) {
+function createAvatarFactory(sprite) {
     function draw(context) {
         const flip = this.Go.heading === -1;
         const frame = getFrame(this);
-        avatarSprite.draw(frame, context, 0, 0, flip);
+        sprite.draw(frame, context, 0, 0, flip);
     }
     function getFrame(avatar) {
         let color, size;
         if (avatar.Shift.isBurning) {
-            color = avatarSprite.animations.get('toFire')(avatar.Shift.burnTime);
+            color = sprite.animations.get('toFire')(avatar.Shift.burnTime);
         } else {
             color = Symbol.keyFor(avatar.Shift.color);
         }
         if (avatar.Shift.isGrowing) {
-            size = avatarSprite.animations.get('grow')(avatar.Shift.growTime);
+            size = sprite.animations.get('grow')(avatar.Shift.growTime);
             const prevSize = avatar.size.y;
             let newSize;
             if (size === "sm") {
@@ -58,7 +56,7 @@ function createAvatarFactory(avatarSprite) {
                 || (avatar.velocity.x < 0 && avatar.Go.dir > 0)) {
                 frame += 'break';
             } else {
-                frame += avatarSprite.animations.get('run')(avatar.Go.distance);
+                frame += sprite.animations.get('run')(avatar.Go.distance);
             }
         } else {
             frame += 'idle';
