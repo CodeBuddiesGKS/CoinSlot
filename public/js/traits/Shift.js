@@ -28,8 +28,11 @@ export default class Shift extends Trait {
         this.burnTimeLimit = 56/60;
         this.growTime = 0;
         this.growTimeLimit = 60/60;
-        this.isGrowing = false;
+        this.shrinkTime = 0;
+        this.shrinkTimeLimit = 90/60;
         this.isBurning = false;
+        this.isGrowing = false;
+        this.isShrinking = false;
         this.size = Size.SM;
     }
     collides(us, them) {
@@ -50,6 +53,13 @@ export default class Shift extends Trait {
             // he is killed when he falls off the map?
         }
     }
+    damage(us) {
+        if (this.size === Size.LG) {
+            this.shrink();
+        } else {
+            us.Killable.kill();
+        }
+    }
     grow(us) {
         if (this.size === Size.SM) {
             this.queue(() => {
@@ -60,13 +70,11 @@ export default class Shift extends Trait {
             });
         }
     }
-    shrink(us) {
+    shrink() {
         if (this.size === Size.LG) {
-            this.queue(() => {
-                this.isGrowing = true;
-                us.Go.on = false;
-                us.Jump.on = false;
-                us.Physics.on = false;
+            this.queue((entity, deltaTime, level) => {
+                this.isShrinking = true;
+                entity.Killable.on = false;
             });
         }
     }
@@ -84,7 +92,18 @@ export default class Shift extends Trait {
         if (!this.on) {
             return;
         }
-        if (this.isGrowing) {
+        if (this.isBurning) {
+            this.burnTime += deltaTime;
+            if (this.burnTime > this.burnTimeLimit) {
+                this.queue(() => {
+                    this.isBurning = false;
+                    this.color = Color.WYR;
+                    entity.Go.on = true;
+                    entity.Jump.on = true;
+                    entity.Physics.on = true;
+                });
+            }
+        } else if (this.isGrowing) {
             this.growTime += deltaTime;
             if (this.growTime > this.growTimeLimit) {
                 this.queue(() => {
@@ -95,15 +114,14 @@ export default class Shift extends Trait {
                     entity.Physics.on = true;
                 });
             }
-        } else if (this.isBurning) {
-            this.burnTime += deltaTime;
-            if (this.burnTime > this.burnTimeLimit) {
+        } else if (this.isShrinking) {
+            this.shrinkTime += deltaTime;
+            if (this.shrinkTime > this.shrinkTimeLimit) {
                 this.queue(() => {
-                    this.isBurning = false;
-                    this.color = Color.WYR;
-                    entity.Go.on = true;
-                    entity.Jump.on = true;
-                    entity.Physics.on = true;
+                    this.isShrinking = false;
+                    this.color = Color.RYG; // This will need to change for Luigi!!!
+                    this.size = Size.SM;
+                    entity.Killable.on = true;
                 });
             }
         }

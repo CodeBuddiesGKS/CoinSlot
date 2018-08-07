@@ -3,6 +3,7 @@ import Killable from '../traits/Killable.js';
 import PendulumMove from '../traits/PendulumMove.js';
 import Physics from '../traits/Physics.js';
 import Solid from '../traits/Solid.js';
+import {Size} from '../traits/Shift.js';
 import {loadSpriteSheet} from '../loaders/loaders.js';
 
 export function loadGoomba(sprite) {
@@ -53,7 +54,7 @@ class Behavior extends Trait {
                 goomba.PendulumMove.on = false;
                 goomba.Killable.kill();
             } else {
-                them.Killable.kill();
+                them.Shift.damage();
             }
         } else {
             this.enemyRicochet(goomba, them);

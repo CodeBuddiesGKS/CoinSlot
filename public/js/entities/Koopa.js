@@ -86,14 +86,14 @@ class Behavior extends Trait {
             } else {
                 switch (this.state) {
                     case STATE_WALKING:
-                        them.Killable.kill();
+                        them.Shift.damage();
                         break;
                     case STATE_HIDING:
                     case STATE_WAKING:
                         this.setStateToSlide(koopa, them);
                         break;
                     case STATE_SLIDING:
-                        them.Killable.kill();
+                        them.Shift.damage();
                         break;
                 }
             }

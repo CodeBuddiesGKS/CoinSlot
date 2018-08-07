@@ -1,6 +1,8 @@
 {
   "imageURL": "img/avatars.png",
   "frames": [
+    {"name": "blink", "rect": [0, 0, 16, 16]},
+
     {"name": "sm-ryg-run-3", "rect": [80, 32, 16, 16]},
     {"name": "sm-ryg-run-2", "rect": [96, 32, 16, 16]},
     {"name": "sm-ryg-run-1", "rect": [112, 32, 16, 16]},
@@ -213,6 +215,17 @@
         "sm", "md",
         "sm", "md", "lg",
         "sm", "md", "lg"
+      ]
+    },
+    {
+      "name": "shrink",
+      "frameLength": 0.1,
+      "frames": [
+        {"sprite": "blink"},
+        {"sprite": "swim", "color": "", "size": "lg"},
+        {"sprite": "blink"},
+        {"sprite": "swim", "color": "", "size": "sm"},
+        {"sprite": "blink"}
       ]
     },
     {

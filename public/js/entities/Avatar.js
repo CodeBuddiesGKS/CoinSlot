@@ -46,6 +46,22 @@ function createAvatarFactory(sprite) {
         } else {
             size = Symbol.keyFor(avatar.Shift.size);
         }
+
+        // if (avatar.Shift.isShrinking) {
+        //     size = sprite.animations.get('shrink')(avatar.Shift.shrinkTime);
+        //     const prevSize = avatar.size.y;
+        //     let newSize;
+        //     if (size === "sm") {
+        //         newSize = 16;
+        //     } else if (size === "md") {
+        //         newSize = 24;
+        //     } else if (size === "lg") {
+        //         newSize = 32;
+        //     }
+        //     const deltaY = prevSize-newSize;
+        //     avatar.size.y = newSize;
+        //     avatar.position.y += deltaY;
+        // }
         
         let frame = size + '-' + color + '-';
 
